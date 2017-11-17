@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+    <style>
+        /* --main-color: #984b43;
+        --sec-color: #233237;
+        --highlight-color: #89d230;
+        --2nd-color: #18121e;
+        --3rd-color: #eac67a; */
+
+        body {
+            background: linear-gradient(0deg, #fff 10%, #eac57a 90%);
+            color: #18121e;
+            height: 100vh;
+        }
+
+        h1 {
+            text-shadow: 2px 2px 10px rgb(20, 20, 20);
+            margin-bottom: 100px;
+        }
+
+        .clock-wrapper {
+            position: relative;
+            height: 300px;
+            width: 300px;
+            cursor: pointer;
+            background-color: transparent;
+            border: 3px solid #18121e;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .clock-wrapper:before {
+            position: absolute;
+            top: 0;
+            content: "";
+            height: 295px;
+            width: 295px;
+            border: 5px solid rgb(240, 217, 175);
+            border-radius: 50%;
+            z-index: 20;
+            overflow: hidden;
+        }
+
+        .inside-text {
+            display: flex;
+            z-index: 3;
+            margin-top: 3rem;
+            align-content: center;
+            flex-direction: column;
+            color: #233237;
+        }
+
+        .type {
+            font-size: 180%;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px #18121e;
+        }
+
+        .time-value {
+            font-size: 340%;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px #18121e;
+        }
+
+        .inside-fill {
+            position: absolute;
+            z-index: -100;
+            bottom: 0;
+
+            width: 100%;
+            background: radial-gradient(#984b43 30%, #261d2e 100%);
+        }
+
+        .controls {
+            user-select: none;
+            font-size: 120%;
+            text-align: center;
+            height: 100px;
+        }
+
+        .controls div {
+            display: inline-block;
+        }
+
+        .break-value {
+            font-size: 140%;
+            margin: 0 10px;
+        }
+
+        .decrement,
+        .increment {
+            display: inline-block;
+            width: 30px;
+            cursor: pointer;
+            transition: all 0.04s;
+        }
+
+        @media (max-width: 360px) {
+            body {
+                font-size: 70%;
+            }
+            h1 {
+                font-size: 300%;
+                margin-bottom: 50px;
+            }
+            .clock-wrapper {
+                height: 200px;
+                width: 200px;
+            }
+            .clock-wrapper:before {
+                height: 195px;
+                width: 195px;
+            }
+            .controls {
+                padding: 0;
+            }
+            .inside-text {
+                margin-top: 1.5rem;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center col-10 mx-auto mt-4">POMODORO CLOCK</h1>
+        </div>
+        <div class="row mb-4">
+            <div class="col-6 controls">
+                <p>Set break length</p>
+                <div class="decrement"> - </div>
+                <div data-func="break" class="break-value"> 5 </div>
+                <div class="increment"> + </div>
+            </div>
+            <div class="col-6 ml-auto controls">
+                <p>Set session length</p>
+                <div class="decrement"> - </div>
+                <div data-func="session" class="break-value"> 25 </div>
+                <div class="increment"> + </div>
+            </div>
+
+            <div class="clock-wrapper mx-auto">
+                <div class="col-10 inside-text">
+                    <div class="type mb-4">
+                        <p>Session</p>
+                    </div>
+                    <div class="time-value mt-4">
+                        <p>25</p>
+                    </div>
+                </div>
+                <div class="inside-fill">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        let countdown;
+        var isStarted = false;
+        const plusBtn = document.querySelectorAll(".increment");
+        const minusBtn = document.querySelectorAll(".decrement");
+        const breakTime = document.querySelector('div[data-func="break"]');
+        const sessionTime = document.querySelector('div[data-func="session"]');
+        const timeLeft = document.querySelector('.time-value');
+
+        ///////////// DEALING WITH BUTTONS AND EFFECTS
+        function increment(e) {
+            if (isStarted) {
+                return;
+            }
+            e.target.style.transform = "scale(1.3)";
+            window.navigator.vibrate(40);
+            operations(e, "+1");
+        };
+        function decrement(e) {
+            if (isStarted) {
+                return;
+            }
+            e.target.style.transform = "scale(1.3)";
+            window.navigator.vibrate(40);
+            operations(e, "-1");
+        };
+        function operations(e, str) {
+            if (e.target.parentElement.classList.length <= 2) {
+                if (str === "-1" && breakTime.innerHTML === "1") {
+                    return;
+                }
+                breakTime.innerHTML = (eval(breakTime.innerHTML.concat(str)));
+                if (document.querySelector(".type p").textContent !== "Session") {
+                    timeLeft.innerText = breakTime.innerHTML;
+                    clearFill();
+                }
+            } else {
+                if (str === "-1" && sessionTime.innerHTML === "1") {
+                    return;
+                }
+                sessionTime.innerHTML = (eval(sessionTime.innerHTML.concat(str)));
+                if (document.querySelector(".type p").textContent === "Session") {
+                    timeLeft.innerText = sessionTime.innerHTML;
+                    clearFill();
+                }
+            }
+        }
+        function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;
+            e.target.style.transform = "";
+        }
+        ////////////////////////ACTUAL CLOCK FUNCTIONS
+        function timer(seconds) {
+            clearInterval(countdown);
+            const now = Date.now();
+            const then = now + seconds * 1000;
+            displayTimeleft(seconds);
+
+            countdown = setInterval(() => {
+                const secondsLeft = Math.round((then - Date.now()) / 1000);
+                if (secondsLeft < 0) {
+                    if (document.querySelector(".type p").textContent === "Session") {
+                        clearFill();
+                        breakStart();
+                    } else {
+                        document.querySelector(".type p").textContent = "Session";
+                        clearFill();
+                        window.navigator.vibrate([100, 50, 100, 50]);
+                        timer(parseTime(sessionTime));
+                    }
+                    return;
+                }
+                displayTimeleft(secondsLeft);
+                var scale = (100 - (secondsLeft / (parseInt(checkSession().textContent) * 60)) * 100).toFixed(2);
+                document.querySelector(".inside-fill").style.height = `${scale}%`;
+            }, 1000);
+
+        }
+        function displayTimeleft(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainderSeconds = seconds % 60;
+            const display = `${minutes}:${remainderSeconds < 10 ? "0" : ""}${remainderSeconds}`;
+            document.title = display;
+            timeLeft.innerHTML = display;
+
+        }
+        function startTimer() {
+            if (!isStarted) {
+                window.navigator.vibrate(200);
+                timer(parseTime(timeLeft));
+                isStarted = true;
+            } else {
+                clearInterval(countdown);
+                window.navigator.vibrate(200);
+                isStarted = false;
+            }
+        }
+        //////////////CONVERTING TIME FORMAT TO SECONDS
+        function parseTime(x) {
+            if (x.textContent.match(/\:/i)) {
+                var a = x.textContent.match(/\d+/g);
+                var seconds = eval(a[0] * 60 + "+" + a[1]);
+            } else {
+                seconds = parseInt(x.textContent) * 60;
+            }
+            return seconds - 1;
+        }
+        //////////////STARTING BREAK
+        function breakStart() {
+            document.querySelector(".type p").textContent = "break";
+            clearFill();
+            window.navigator.vibrate([100, 50, 100, 50]);
+            timer(parseTime(breakTime));
+        }
+        function checkSession() {
+            if (document.querySelector(".type p").textContent === "Session") {
+                return sessionTime;
+            } else {
+                return breakTime;
+            }
+        }
+        function clearFill() {
+            document.querySelector(".inside-fill").style.height = "";
+        }
+
+        plusBtn.forEach(function (a) {
+            a.addEventListener("click", increment);
+        });
+        plusBtn.forEach(function (a) {
+            a.addEventListener("transitionend", removeTransition);
+        });
+        minusBtn.forEach(function (a) {
+            a.addEventListener("click", decrement);
+        });
+        minusBtn.forEach(function (a) {
+            a.addEventListener("transitionend", removeTransition);
+        });
+        document.querySelector(".clock-wrapper").addEventListener("click", startTimer);
+    </script>
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

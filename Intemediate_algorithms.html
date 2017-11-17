@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Array Cardio 💪</title>
+</head>
+
+<body>
+  <p><em>Psst: have a look at the JavaScript</em> 💁</p>
+  <script>
+    // [
+    // 	{
+    // 		"name": "reg.ru",
+    // 		"host": "server171.hosting.reg.ru",
+    // 		"port": 21,
+    // 		"type": "ftp",
+    // 		"username": "u0378914",
+    // 		"password": "!gR7D7_t",
+    // 		"path": "/www/",
+    // 		"autosave": true,
+    // 		"confirm": true
+    // 	}
+    // ]
+    /********************************************************************************/
+
+    //function largestOfFour(arr) {
+    //  // You can do this!
+    //var total;
+    //var answer = arr.map(num => {
+    //    total = 0;
+    //    num.forEach(add => {
+    //        add > total ? total = add : total;
+    //     });
+    //    return total;
+    //
+    //})
+    //   // console.log(answer);
+    //
+    //}
+    //
+    //largestOfFour([[4, 500, 1, 3], [13, 2700, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
+    //
+    ///****************************************************************************/
+    //function destroyer(arr) {
+    //    for (i = 1; i < arguments.length; i++){
+    //        tre = arguments[i];
+    //        arr = arr.filter(function(item){
+    //            if(item !== tre){
+    //                return true;
+    //            }
+    //        })
+    //    }
+    //
+    //   // console.log(arr);
+    //}
+    //
+    //destroyer([1, 2, 3, 1, 2, 3], 2, 1);
+
+    /*********************************************************************/
+
+    //       function rot13(str) { // LBH QVQ VG!
+
+    //    var string = "";
+    //   for(i=0;i<str.length; i++){
+    //     var arr=[];
+    //     if(str.charCodeAt(i) >= 65 && str.charCodeAt(i) <= 90){
+    //         if(str.charCodeAt(i) >= 65 && str.charCodeAt(i) <= 77){
+    //             arr[i] = str.charCodeAt(i) + 13;
+
+    //         } else{
+    //           arr[i] = str.charCodeAt(i) - 13;
+
+    //       }
+
+    //       } else {
+    //            arr[i] = str.charCodeAt(i);
+    //       }
+
+    //        string = string.concat(String.fromCharCode(arr[i]));
+    //   }
+
+    //   console.log(string);
+    // }
+
+    // Change the inputs below to test
+    //rot13("SERR CVMMN!");
+
+    /**************************************************************************************/
+
+    // function diffArray(arr1, arr2) {
+    //   var newArr = [];
+    //   var start = false;
+    //   for(i=0; i <= arr1.length; i++){
+    //     start ? i = 0 : i;
+    //     for (y=0; y<=arr2.length; y++){
+    //       console.log(start);
+    //       start ? y = 0 : y;
+    //     if(arr2[y] === arr1[i]){
+
+    //       console.log("before " + arr1);
+    //       console.log("before " + arr2);
+    //       console.log(start);
+    //       console.log(arr2[y]);
+    //       console.log(arr1[i]);
+
+    //      arr1.splice(i, 1);
+    //      arr2.splice(y, 1);
+
+    //      console.log("after " + arr1);
+    //      console.log("after " + arr2);
+    //       start = true;
+    //     } else {
+    //       start = false;
+
+    //       }
+
+    //     }
+
+
+    //   }
+    //    newArr = arr1.concat(arr2);
+
+    //   // Same, same; but different.
+
+    //   console.log(newArr);
+    // }
+
+    // diffArray(["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"],
+    // ["diorite", "andesite", "grass", "dirt", "dead shrub"]);
+
+    /*******************************************************************************************/
+
+    // function convertToRoman(num) {
+    // breakNum(num);
+    // console.log(numArr);
+    // numArr.forEach(function(item, index) {
+    //   if(item >= 1000){
+    //     var add= "";
+    //     for(i=1000; i<=item;i +=1000){
+    //       add += "M";
+    //      }
+    //     numArr[index] = add;
+    //   } else {
+    //   switch(item){
+    //   case (900): numArr[index] = "CM"; break;
+    //   case (800): numArr[index] = "DCCC"; break;
+    //   case (700): numArr[index] = "DCC"; break;
+    //   case (600): numArr[index] = "DC"; break;
+    //   case (500): numArr[index] = "D"; break;
+    //   case (400): numArr[index] = "CD"; break;
+    //   case (300): numArr[index] = "CCC"; break;
+    //   case (200): numArr[index] = "CC"; break;
+    //   case (100): numArr[index] = "C"; break;
+    //   case (90): numArr[index] = "XC"; break;
+    //   case (80): numArr[index] = "LXXX"; break;
+    //   case (70): numArr[index] = "LXX"; break;
+    //   case (60): numArr[index] = "LX"; break;
+    //   case (50): numArr[index] = "L"; break;
+    //   case (40): numArr[index] = "XL"; break;
+    //   case (30): numArr[index] = "XXX"; break;
+    //   case (20): numArr[index] = "XX"; break;
+    //   case (10): numArr[index] = "X"; break;
+    //   case (9): numArr[index] = "IX"; break;
+    //   case (8): numArr[index] = "VIII"; break;
+    //   case (7): numArr[index] = "VII"; break;
+    //   case (6): numArr[index] = "VI"; break;
+    //   case (5): numArr[index] = "V"; break;
+    //   case (4): numArr[index] = "IV"; break;
+    //   case (3): numArr[index] = "III"; break;
+    //   case (2): numArr[index] = "II"; break;
+    //   case (1): numArr[index] = "I"; break;
+    // }}
+    // });
+    // num = numArr.toString().replace(/,/gi, "");
+    // console.log(num);
+
+    // return num;
+    // }
+
+    // function breakNum (num){
+    // str = num.toString();
+    // numArr = [];
+    // let count = 0;
+    // if(str.length > 3){
+    // for (i=0; i<str.length; i++){
+    //   if(str[i] !== "0" && count == 0){
+    //     numArr.push(Number.parseInt(str[i].concat("000")));
+    //   } else  if(str[i] !== "0" && count == 1){
+    //     numArr.push(Number.parseInt(str[i].concat("00")));
+    //   } else if(str[i] !== "0" && count == 2){
+    //     numArr.push(Number.parseInt(str[i].concat("0")));
+    //   }
+    //     else if(str[i] !== "0" && count == 3){
+    //     numArr.push(Number.parseInt(str[i]));
+    //   }
+    //   count ++;
+    // }}
+    // if(str.length > 2){
+    // for (i=0; i<str.length; i++){
+    //   if(str[i] !== "0" && count == 0){
+    //     numArr.push(Number.parseInt(str[i].concat("00")));
+    //      } else  if(str[i] !== "0" && count == 1){
+    //     numArr.push(Number.parseInt(str[i].concat("0")));
+    //   } else if(str[i] !== "0" && count == 2){
+    //     numArr.push(Number.parseInt(str[i]));
+    //   }
+    //   count ++;
+    // }}
+    // if(str.length > 1){
+    // for (i=0; i<str.length; i++){
+    //   if(str[i] !== "0" && count == 0){
+    //     numArr.push(Number.parseInt(str[i].concat("0")));
+    //    } else  if(str[i] !== "0" && count == 1){
+    //     numArr.push(Number.parseInt(str[i]));
+    //    }
+    //   count ++;
+    // }} else {
+    //     numArr.push(Number.parseInt(str));
+    //    }
+    //   count ++;
+
+    // return numArr;
+
+    // }
+    // convertToRoman(9422);
+    // var convertToRoman = function(num) {
+
+    //   var decimalValue = [ 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 ];
+    //   var romanNumeral = [ 'M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I' ];
+
+    //   var romanized = '';
+
+    //   for (var index = 0; index < decimalValue.length; index++) {
+    //     while (decimalValue[index] <= num) {
+    //       romanized += romanNumeral[index];
+    //       num -= decimalValue[index];
+    //     }
+    //   }
+
+    //   console.log(romanized) ;
+    // }
+
+
+    // convertToRoman(6379);
+    /***************************************************************************************************/
+
+
+    // function whatIsInAName(collection, source) {
+    //   var arr = [];
+    //   var isTrue = false;
+    //   for(i=0; i<collection.length; i++){
+    //    for(y=Object.keys(source).length; y>0; y--){
+    //     collection[i].hasOwnProperty(Object.keys(source)[Object.keys(source).length-y]) ? isTrue = true : isTrue = false;
+    //       }
+    //       collection[i][Object.keys(source)[0]] === source[Object.keys(source)[0]] && isTrue ?
+    //         arr.push(collection[i]) : arr;
+
+    //   }
+    //     console.log(arr);
+    // }
+
+    // whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+
+
+
+
+    /***************************************************************************************************/
+
+
+
+    // function myReplace(str, before, after) {
+    //   const regex = new RegExp(before, 'g');
+    //   (before.charCodeAt(0) < 97) ? after = after[0].toUpperCase().concat(after.slice(1)) : after;
+    //     str = str.replace(regex, after);
+    //   console.log(str);
+    // }
+    // myReplace("A quick brown fox Jumped over the lazy dog", "Jumped", "leaped");
+
+
+
+    /*****************************************************************************************************/
+
+
+    // function translatePigLatin(str) {
+    //   var notVoval = true;
+    //   var notVovalAgain = 0;
+    //   var letter;
+    //   var stop = false;
+    //   var newArr = str.split("");
+
+    // //check if fist letter is voval
+    //   letter = str[0].charCodeAt(0);
+    //   if(letter == 97 || letter == 101 || letter == 105 || letter == 111 || letter == 117 || letter == 121){
+    //   notVoval = false;
+    //   str = str.concat("way");
+    //   stop = true;
+    // }
+    // //loop through the word
+    //   newArr.forEach(function(item, index) {
+    //     letter = item[0].charCodeAt(0);
+    //     (letter == 97 || letter == 101 || letter == 105 || letter == 111 || letter == 117 || letter == 121) ? notVoval = false : notVoval;
+    //     if(notVoval){
+    //       notVovalAgain += 1;
+    //     } else if(!stop){
+    //       str = str.slice(index).concat(str.slice(0, notVovalAgain)).concat("ay");
+    //       stop = true;
+    //     }
+
+    //   });
+    //   console.log(str);
+    // }
+
+    // translatePigLatin("rrra");
+
+
+    /******************************************************************************************************/
+
+    // A = AT
+    // T = TA
+    // C = CG
+    // G = GC
+
+    // function pairElement(str) {
+    //   str = str.split("");
+    //   str.forEach((item, index) => {
+    //     switch(item){
+    //       case "A":
+    //       str[index] = ["A", "T"];
+    //       return;
+    //       case "T":
+    //       str[index] = ["T", "A"];
+    //       return;
+    //       case "G":
+    //       str[index] = ["G", "C"];
+    //       return;
+    //       case "C":
+    //       str[index] = ["C", "G"];
+    //       return;
+    //     }
+    //   });
+    //   console.log(str);
+    // }
+
+    // pairElement("ACG");
+
+
+    /******************************************************************************************************/
+
+
+
+
+    // function fearNotLetter(str) {
+    //   var base = [];
+    //   var start = false;
+    //   var missingLetter;
+    //   var startPoint;
+    // // array of charcodes
+    //   for (i = 97; i <= 122 ; i++){
+    //   base.push(i);
+    //   }
+    // // array from a string
+    //   var newArr = [];
+    //   for(i = 0; i < str.length; i++){
+    //     newArr.push(str.charCodeAt(i));
+    //   }
+    //   // loop through
+    //   newArr.forEach(function(item, index) {
+    //     base.forEach(function(element, num){
+    //       if(element == item && !start){
+    //         startPoint = element;
+    //         start = true;
+    //       }
+    //       if(element == item && start){
+    //         if((element - startPoint) >= 2){
+    //           missingLetter = String.fromCharCode(element - 1);
+    //          }
+    //         startPoint = element;
+    //       }
+    //     })
+    //   })
+
+    //   console.log(missingLetter);
+    // }
+
+    // fearNotLetter("bce");
+
+
+    /*********************************************************************************************************/
+
+
+    // function uniteUnique(arr) {
+    // var newArr = Array.from(arguments).reduce((a, b) => {
+    //        return a.concat(b);
+    //   });
+    // for (y = 0; y < newArr.length; y ++){
+    //   for (i = y + 1; i < newArr.length; i++){
+    //     (newArr[y] == newArr[i]) ? newArr.splice(i, 1) : newArr;
+    //   }
+    // }
+    //   console.log(newArr);
+    // }
+
+    // uniteUnique([1, 3, 2], [1, [5]], [2, [4]]);
+
+    /// FROM STACKOVERFLOW
+    // var unique = arr.filter(function(elem, index, self) {
+    //     return index == self.indexOf(elem);
+    // })
+
+
+    /**************************************************************************************************************/
+
+    //  &  &amp;
+    //  < &lt;
+    //  > &gt;
+    //  " &quot;
+    //  ' &apos;
+    // function convertHTML(str) {
+
+    //   var regexp = new RegExp(/&|<|>|"|'/, 'g');
+    //   function replacer(match) {
+    //     switch(match){
+    //       case "&":
+    //       return  "&amp;";
+
+    //       case "<":
+    //       return  "&lt;";
+
+    //       case ">":
+    //       return  "&gt;";
+
+    //       case "\"":
+    //       return  "&quot;";
+
+    //       case "'":
+    //       return  "&apos;";
+
+    //     }
+    //  }
+    //   str = str.replace(regexp,replacer);
+    //   console.log(str);
+    // }
+
+    // convertHTML("Hamburgers < Pizza > Tacos");
+
+
+
+    /********************************************************************************************************************/
+
+    // function spinalCase(str) {
+    //   function toLower(match, offset) {
+    //     if(match){
+    //     return (offset ? '-' : '') + match.toLowerCase();
+    //   }}
+    //   console.log(str.replace(/[A-Z]|\s\w/g, toLower).replace(/\s|_/gi, ""));
+    // }
+
+
+    // spinalCase("This Is Spinal Tap");
+    // spinalCase("thisIsSpinalTap");
+    // spinalCase("The_Andy_Griffith_Show");
+    // spinalCase("Teletubbies say Eh-oh");
+    // spinalCase("AllThe-small Things");
+    // spinalCase("This Is Spinal Tap");
+
+
+    // /******FROM STACKOVERFLOW*********************/
+    // function spinalCase(str) {
+    //   return str.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\W|_/g,'-').toLowerCase()
+    // }
+
+
+    /******************************************************************************************/
+
+    // function sumFibs(num) {
+    //   var newArr = [1, 1];
+    //   var currentNum = 1;
+    //   var previousNum = 1;
+    //   while (currentNum + previousNum <= num) {
+    //     newArr.push(currentNum + previousNum);
+    //     currentNum = currentNum + previousNum;
+    //     previousNum = currentNum - previousNum;
+    //   }
+    //   console.log(newArr = newArr
+    //     .filter(function (item) {
+    //       return (item % 2 !== 0);
+    //     })
+    //     .reduce(function (a, b) {
+    //       return a + b;
+    //     }));
+
+    // }
+    // sumFibs(1000);
+    /**********************************************************************************************/
+
+    // function sumPrimes(num) {
+    //   var newArr = [];
+    //   for (i = 1; i <= num; i++) {
+    //     newArr.push(i);
+    //   }
+    //   for (y = 1; y < newArr.length; y++) {
+    //     for (i = newArr[y]; i < newArr.length; i++) {
+    //       if (newArr[i] % newArr[y] == 0) {
+    //         newArr.splice(i, 1);
+    //       }
+    //     }
+    //   }
+    //   newArr.splice(0, 1);
+    //   console.log(newArr.reduce((a,b) => a + b));
+
+    // }
+
+
+    // sumPrimes(500);
+
+
+    /*****************************************************************************************/
+
+    // function smallestCommons(arr) {
+    //   arr.sort((a, b) => a - b);
+    //   var newArr = [];
+    //   for (i = arr[0]; i <= arr[arr.length - 1]; i++) {
+    //     newArr.push(i);
+    //   }
+    //   newArr.sort((a, b) => b - a);
+
+    //   var isFound = false;
+    //   var num = newArr[newArr.length - 1] + 1;
+    //   var lastNum = num;
+    //   for (y = 0; y < newArr.length - 1; y++) {
+
+    //     while ((num % newArr[y] !== 0) || (num % newArr[y + 1] !== 0)) {
+    //       console.log(num + " " + newArr[y]);
+    //       console.log(num + " " + newArr[y + 1]);
+    //       num++;
+    //     }
+    //     lastNum = num;
+    //     console.log(num);
+    //   }
+    //   console.log(newArr);
+    // }
+
+
+    // smallestCommons([3, 5]);
+
+    /********FROM STACKOVERFLOW **********/
+    // function smallestCommons(arr) {
+
+    //   var max = Math.max(arr[0], arr[1]);
+    //   var min = Math.min(arr[0], arr[1]);
+
+    //   var mltple = max;
+
+    //   for (var i = max; i >= min; i--) {
+    //     console.log(i + "i");
+    //     if (mltple % i !== 0) {
+    //       mltple += max;
+    //       i = max;
+    //       console.log(mltple + "mt");
+    //     }
+    //   }
+
+    //   console.log(mltple);
+    // }
+    // smallestCommons([3, 7]);
+
+    /************************************************************************************/
+
+
+    // function findElement(arr, func) {
+    //   var num = 0;
+    //   console.log(arr.filter(func)[0]);
+    // }
+
+    // findElement([1, 2, 3, 4], function (num) { return num % 2 === 0; });
+
+    /****************************************************************************************/
+    // function dropElements(arr, func) {
+    //   // Drop them elements.
+    //   var newArr = [];
+    //   var stop = false;
+    //   for (i = 0; i < arr.length; i++) {
+    //     if (func(arr[i]) && !stop) {
+    //       console.log(arr[i]);
+    //       newArr = arr.slice(i);
+    //       stop = true;
+    //     }
+    //   }
+    //   console.log(newArr);
+    // }
+    // dropElements([1, 2, 3, 9, 2], function (n) { return n > 2; });
+
+
+    /**************************************************************************************/
+    // function steamrollArray(arr) {
+    //   // I'm a steamroller, baby
+    //   for (i = 0; i < arr.length; i++) {
+    //     if (Array.isArray(arr[i])) {
+    //       arr = arr.reduce((a, b) => a.concat(b), []);
+    //       i = 0;
+    //     }
+    //   }
+    //   console.log(arr);
+    // }
+
+    // steamrollArray([1, [2], [3, [[4]]]]);
+
+    /***********************************************************************************************/
+    // function binaryAgent(str) {
+    //   function toDecimal(match) {
+    //     return String.fromCharCode(parseInt(match, 2));
+    //   }
+    //   str = str.replace(/\s/g, "").replace(/(\d{8})/g, toDecimal);
+    //   console.log(str);
+    // }
+
+    // binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
+
+
+    /*************************************************************************************/
+
+    // function truthCheck(collection, pre) {
+    //   var isTrue = true;
+    //   collection.forEach(function (element) {
+    //     !element[pre] ? isTrue = false : isTrue;
+
+    //   });
+    //   console.log(isTrue);
+    // }
+
+    // truthCheck([{ "user": "Tinky-Winky", "sex": "male" }, { "user": "Dipsy", "sex": "male" }, { "user": "Laa-Laa", "sex": "female" }, { "user": "Po", "sex": "female" }], "sex");
+
+
+    /******************************************************************************************/
+    // function addTogether() {
+
+    //   function isNum(num) {
+    //     return Number.isInteger(num);
+    //   }
+    //   if (arguments.length > 1) {
+    //     if (isNum(arguments[0]) && isNum(arguments[1])) {
+    //       var newArr = Array.from(arguments);
+    //       console.log(newArr.reduce(function (a, b) {
+    //         return a + b;
+    //       }))
+    //     } else {
+    //       console.log(undefined);
+    //     }
+    //   } else if (isNum(arguments[0])) {
+    //     var firstNum = arguments[0];
+    //     function addSecond() {
+    //       //var newSum = parseInt(prompt("Enter 2nd arg!"), 10);
+    //       if (isNum(newSum)) {
+    //         console.log(newSum + firstNum);
+    //       } else {
+    //         console.log(undefined);
+    //       }
+    //     }
+    //     return addSecond();
+
+    //   } else {
+    //     console.log(undefined);
+    //   }
+    // }
+    // addTogether(150);
+    /********************************************************************************************/
+    // function telephoneCheck(str) {
+    //   var mine;
+    //   var isTrue = false;
+    //   function compareStr(match) {
+    //     if (match) {
+    //       isTrue = true;
+    //     }
+    //   }
+    //   var regTen = new RegExp(/(\d{3}-\d{3}-\d{4})|(\(\d{3}\)\d{3}-\d{4})|(\(\d{3}\)\s\d{3}-\d{4})|(\d{3}\s\d{3}\s\d{4})|(\d{10})/);
+    //   var regEleven = new RegExp(/(1\s\d{3}-\d{3}-\d{4})|(1\(\d{3}\)\d{3}-\d{4})|(1\s\(\d{3}\)\s\d{3}-\d{4})|(1\s\d{3}\s\d{3}\s\d{4})|(\b\d{10})/);
+
+    //   if (str.match(/\d/g).length < 10 || str.match(/\d/g).length > 11) {
+    //     isTrue = false;
+    //   } else if (str.match(/\d/g).length == 10) {
+    //     str.replace(regTen, compareStr);
+    //   } else {
+    //     str.replace(regEleven, compareStr);
+    //   }
+    //   console.log(isTrue);
+    // }
+
+    // telephoneCheck("4555 555 555");
+
+    /******From Stacks**************/
+    // function telephoneCheck(str) {
+    //   var regex = /^(1\s?)?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{4}$/;
+    //   return regex.test(str);
+    // }
+    // telephoneCheck("555-555-5555");
+
+    // //^ denotes the beginning of the string
+    // (1\s?)? checks allows for a "1" or a "1 " at the beginning.
+    // \d{n} checks for exactly n number of digits so (\(\d{3}\)|\d{3}) checks for three digits that are allowed to be between parenthesis.
+    // [\s\-]? checks for spaces or dashes between the groups of digits.
+    // $ denotes the end of the string. In this case the beginning and end of the string are used in the regex to prevent it from matching any longer string that might contain a valid phone number (eg. "s 555 555 5555 a").
+    // Lastly we use regex.test(str) to test if the string adheres to the regular expression and return true or false.'
+
+    /**************************************************************************/
+    // Setup
+    // var collection = {
+    //   "2548": {
+    //     "album": "Slippery When Wet",
+    //     "artist": "Bon Jovi",
+    //     "tracks": [
+    //       "Let It Rock",
+    //       "You Give Love a Bad Name"
+    //     ]
+    //   },
+    //   "2468": {
+    //     "album": "1999",
+    //     "artist": "Prince",
+    //     "tracks": [
+    //       "1999",
+    //       "Little Red Corvette"
+    //     ]
+    //   },
+    //   "1245": {
+    //     "artist": "Robert Palmer",
+    //     "tracks": []
+    //   },
+    //   "5439": {
+    //     "album": "ABBA Gold"
+    //   }
+    // };
+    // // Keep a copy of the collection for tests
+    // var collectionCopy = JSON.parse(JSON.stringify(collection));
+
+    // // Only change code below this line
+    // function updateRecords(id, prop, value) {
+
+    //   if (!value) {
+    //     delete collection[id][prop];
+    //     console.log(collection);
+    //     return;
+    //   }
+    //   if (value && (prop !== "tracks")) {
+    //     collection[id][prop] = value;
+    //   } else if (collection[id][prop]) {
+    //     collection[id]["tracks"].push(value);
+    //   } else {
+    //     collection[id]["tracks"] = [];
+    //     collection[id]["tracks"].push(value);
+    //   }
+    //   console.log(collection);
+    // }
+
+    // // Alter values below to test your code
+    // updateRecords(2548, "artist", "");
+    /***************************************************************************************************************/
+
+    // function sym(args) {
+
+    //   var arr = Array.from(arguments);
+
+    //   arr = arr.reduce(function (memo, item, index) {
+    //     return memo.concat([item.filter(function (elem, ind) {
+    //       return item.indexOf(elem) === ind;
+
+    //     })]);
+
+    //   }, []);
+    //   console.log(arr);
+    //   arr = arr.reduce(
+    //     function (a, b) {
+    //       var semi = a.concat(b);
+    //       for (y = 0; y < semi.length; y++) {
+    //         for (i = y + 1; i < semi.length; i++) {
+    //           if (semi[y] == semi[i]) {
+    //             semi.splice(i, 1);
+    //             semi.splice(y, 1);
+    //             i = y + 1;
+    //           }
+    //         }
+    //       }
+    //       return semi;
+
+    //     },
+    //     []
+    //   );
+    //   console.log(arr);
+
+    // }
+
+    // sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]);
+
+    // /*************FROM STACKOVERFLOW***********************/
+    // function sym() {
+
+    //   // Convert the argument object into a proper array
+    //   var args = Array.prototype.slice.call(arguments);
+
+    //   // Return the symmetric difference of 2 arrays
+    //   var getDiff = function (arr1, arr2) {
+
+    //     // Returns items in arr1 that don't exist in arr2
+    //     function filterFunction(arr1, arr2) {
+    //       return arr1.filter(function (item) {
+    //         return arr2.indexOf(item) === -1;
+    //       });
+    //     }
+
+    //     // Run filter function on each array against the other
+    //     return filterFunction(arr1, arr2)
+    //       .concat(filterFunction(arr2, arr1));
+    //   };
+
+    //   // Reduce all arguments getting the difference of them
+    //   var symarray = args.reduce(getDiff, []);
+
+    //   // Run filter function to get the unique values
+    //   var unique = symarray.filter(function (elem, index, self) {
+    //     return index === self.indexOf(elem);
+    //   });
+    //   return unique;
+    // }
+
+    // // test here
+    // sym([1, 2, 3], [5, 2, 1, 4]);
+
+    // /*******************OR************************/
+
+    // function sym(args) {
+
+    //   var arr = Array.from(arguments);
+
+    //   arr = arr.reduce(function (a, b) {
+    //     var aNotB = a.filter(function (val) {
+    //       return !b.includes(val);
+    //     });
+    //     var bNotA = b.filter(function (val) {
+    //       return !a.includes(val);
+    //     });
+    //     return aNotB.concat(bNotA);
+    //   });
+
+    //   return arr.filter(function (value, index, self) {
+    //     return self.indexOf(value) === index;
+    //   });
+    // }
+    /***********************************************************************************************************/
+    // function checkCashRegister(price, cash, cid) {
+    //   // set up vars and push coin nominals into cid array
+    //   var change = parseFloat((cash - price).toFixed(2));
+    //   var nominal = [0.01, 0.05, 0.10, 0.25, 1, 5, 10, 20, 100];
+    //   var finalChange = [];
+    //   var cashSum = 0;
+
+    //   cid.forEach(function (element, index) {
+    //     element.push(nominal[index]);
+    //   });
+    //   //getting sum of all coins in the cash
+    //   for (i = 0; i < cid.length; i++) {
+    //     cashSum += cid[i][1];
+    //   }
+    //   // validating stuff
+    //   if (change > cashSum) {
+    //     console.log("Insufficient Funds");
+    //   }
+    //   if (change === 0 || change === cashSum) {
+    //     console.log("Closed");
+    //   }
+
+    //   var y = 0;
+    //   // loop through cid array starting from the end
+    //   for (i = cid.length - 1; i >= 0; i--) {
+    //     if (cid[i][2] <= change && cid[i][1] >= cid[i][2]) {
+    //       cid[i][1] -= cid[i][2];
+    //       change -= cid[i][2];
+    //       change = parseFloat(change.toFixed(2));
+
+    //       // looking for matches in the finalchange array, if there is one, adding value to it instead of pushing new item into array
+    //       if (finalChange.length > 0 && finalChange[y - 1][0] === cid[i][0]) {
+    //         finalChange[y - 1][1] += cid[i][2];
+    //       } else {
+    //         finalChange.push([cid[i][0], cid[i][2]]);
+    //         y++;
+    //       }
+    //       //restarting the loop
+    //       i = cid.length - 1;
+    //     }
+    //   }
+    //   //validating given sum after looping
+    //   cashSum = 0;
+    //   for (i = 0; i < finalChange.length; i++) {
+    //     cashSum += finalChange[i][1];
+    //   }
+    //   cashSum = parseFloat(cashSum.toFixed(2));
+    //   if (cashSum !== parseFloat((cash - price).toFixed(2))) {
+    //     console.log("Insufficient Funds");
+    //   } else {
+    //     console.log(finalChange);
+    //   }
+    // }
+    // checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1.00], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+
+    /******************FROM SO***************************************/
+    /*jshint esversion: 6 */
+
+    // function checkCashRegister(price, cash, cid) {
+    //   //declare and initialize variables
+    //   var change = Math.round((cash - price) * 100);
+
+    //   var value = 0;
+    //   var changeRecord = [];
+    //   var currency = [1, 5, 10, 25, 100, 500, 1000, 2000, 10000];
+    //   //convert all floats to integers due to floating point number issue
+    //   cid.forEach(el => el[1] = Math.round(el[1] * 100));
+    //   //helper function to check if sufficient cash for change is in the drawer
+    //   function enoughFund(cid) {
+    //     var sum = cid.filter((el, i) => change >= currency[i]);
+    //     return sum.reduce((a, b) => {
+    //       return a + b[1];
+    //     }, 0);
+    //   }
+
+    //   //Actual program/control flow starts here
+    //   if (enoughFund(cid) < change)
+    //     console.log("Insufficient Funds");
+    //   else if (enoughFund(cid) === change)
+    //     console.log("Closed");
+    //   else {
+    //     for (var i = cid.length - 1; i > -1; i--) {
+    //       value = 0;
+    //       while (cid[i][1] > 0 && change >= currency[i]) {
+    //         //update everything as long as condition is true
+    //         change -= currency[i];
+    //         cid[i][1] -= currency[i];
+    //         //value keeps track of the amount of each currency unit as change
+    //         value += currency[i];
+    //       }
+    //       if (value)
+    //         changeRecord.push([cid[i][0], value]);
+    //     }
+    //   }
+    //   //divide each array by 100 to display a proper money format
+    //   changeRecord.forEach(el => el[1] = (el[1] / 100));
+    //   console.log(changeRecord);
+    // }
+    // checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 1], ["DIME", 0.1], ["QUARTER", 0], ["ONE", 1.00], ["FIVE", 0], ["TEN", 10], ["TWENTY", 40], ["ONE HUNDRED", 0]]);
+
+    /**********************************************************************************/
+
+    // function updateInventory(arr1, arr2) {
+    //   // All inventory must be accounted for or you're fired!
+    //   arr1 = arr1.concat(arr2);
+    //   var newArr = [];
+
+    //   for (i = 0; i <= arr1.length; i++) {
+    //     if (arr1.length === 1) {
+    //       newArr.push(arr1[0]);
+    //     }
+    //     arr1.reduce(function (a, b, cid) {
+    //       if (a[1] === b[1]) {
+    //         a[0] += b[0];
+    //         newArr.push(a);
+    //         arr1.splice(0, 1);
+    //         arr1.splice(cid - 1, 1);
+    //       } else if (cid === arr1.length - 1) {
+    //         newArr.push(arr1[0]);
+    //         arr1.splice(0, 1);
+    //       }
+    //       i = 0;
+    //       return a;
+    //     })
+    //   }
+    //   arr1 = newArr.sort(function (c, d) {
+    //     if (c[1] > d[1]) {
+    //       return 1;
+    //     }
+
+    //   })
+    //   console.log(arr1);
+    // }
+
+    // // Example inventory lists
+    // var curInv = [
+    //   [21, "Bowling Ball"],
+    //   [2, "Dirty Sock"],
+    //   [1, "Hair Pin"],
+    //   [5, "Microphone"]
+    // ];
+
+    // var newInv = [
+    //   [2, "Hair Pin"],
+    //   [3, "Half-Eaten Apple"],
+    //   [67, "Bowling Ball"],
+    //   [7, "Toothpaste"]
+    // ];
+
+    // updateInventory(curInv, newInv);
+
+    /*******************FROM OF*********************************/
+
+    // function updateInventory(arr1, arr2) {
+    //   arr2.forEach((e,i)=>{
+    //     x=arr1.map(e=>e[1]).indexOf(e[1]);
+    //     if(x==-1) arr1.push(e);
+    //     else arr1[x][0]+=e[0];
+    //   });
+    //   return arr1.sort((a,b)=>a[1]>b[1]);
+    // }
+
+    // function updateInventory(arr1, arr2) {
+    //   // All inventory must be accounted for or you're fired!
+
+    //   var index;
+    //   var arrCurInvName = []; // Names of arr1's items
+    //   var arrNeInvName = []; // Names of arr2's items
+
+    //   // Same as using two for loops, this takes care of increasing the number of stock quantity.
+    //   arr1.map(function(item1) {
+    //     return arr2.map(function(item2) {
+    //       if (item1[1] === item2[1]) {
+    //         item1[0] = item1[0] + item2[0]; //Increase number of stock
+    //       }
+    //     });
+    //   });
+
+    //   // Get item's name for new Inventory
+    //   arr2.map(function(item) {
+    //     arrNeInvName.push(item[1]);
+    //   });
+
+    //   // Get item's name for Current Inventory
+    //   arr1.map(function(item) {
+    //     arrCurInvName.push(item[1]);
+    //   });
+
+    //   // Add new inventory items to current inventory.
+    //   arrNeInvName.map(function(item) {
+    //     if (arrCurInvName.indexOf(item) === -1) {
+    //       index = arrNeInvName.indexOf(item);
+    //       arr1.push(arr2[index]);
+    //     }
+    //   });
+
+    //   // Sort the array alphabetically using the second element of the array as base.
+    //   arr1.sort(function(currItem, nextItem) {
+
+    //     //Ternary function to avoid using if else
+    //     return currItem[1] > nextItem[1] ? 1 : -1;
+    //   });
+
+    //   return arr1;
+    // }
+    /*****************************************************************************************/
+
+    // function permAlone(str) {
+
+    //   var arr = str.split("");
+    //   var newArr = [];
+    //   var c = [];
+    //   var count = false;
+    //   // create function that turns array to a string, runs the match for repeated chars and pushes array if it is not matched
+    //   function filterArr(arr) {
+    //     var finalArr = arr.join("");
+    //     finalArr.replace(/(.)\1+/i, seekForRepeat);
+    //     count ? count = false : newArr.push(arr.slice().join(""));
+    //   }
+    //   // create a function that looks the string for repeated chars and return true if found
+    //   function seekForRepeat(match) {
+    //     match ? count = true : count;
+    //   }
+    //   // fill the additional array c
+    //   for (i = 0; i < arr.length; i++) {
+    //     c[i] = 0;
+    //   }
+    //   // run filter for the first array which is given by default
+    //   filterArr(arr);
+    //   // start the loop
+    //   i = 0;
+    //   while (i < arr.length) {
+    //     if (c[i] < i) {
+    //       if (i % 2 === 0) {
+    //         var curr = arr[0];
+    //         arr[0] = arr[i];
+    //         arr[i] = curr;
+
+    //       } else {
+    //         var curr = arr[c[i]];
+    //         arr[c[i]] = arr[i];
+    //         arr[i] = curr;
+    //       }
+    //       // after all the swaps filter the result and push it if chars not repeat
+    //       filterArr(arr);
+    //       c[i]++;
+    //       i = 0;
+    //     } else {
+    //       c[i] = 0;
+    //       i++;
+    //     }
+    //   }
+
+    //   console.log(newArr);
+    // }
+
+    // permAlone("zpp");
+
+
+    /*******************************************************************************************************/
+
+
+    function pairwise(arr, arg) {
+
+      var newArr = [];
+      // run reduce function for every item in the array
+      for (i = 0; i < arr.length; i++) {
+        arr.reduce(function (a, b, currInd) {
+          // dealing with running comparison on the same element  - compare current index and i
+          if (a + b === arg && currInd !== i) {
+            // push the matched sum of indexes into newArr
+            newArr.push((i + currInd));
+            //replace the matched numbers with undefined to keep indexes the same
+            arr.splice(i, 1, undefined);
+            arr.splice(currInd, 1, undefined);
+            //reset accumulator after match
+            a = arr[i];
+          }
+          return a;
+        }, arr[i]);
+      }
+      //sort result array
+      newArr = newArr
+        .sort(function (a, b) {
+          return a - b;
+        })
+        // get the sum of first two items and add 0 as starting value for empty array case
+        .reduce(function (c, d, ind) {
+          while (ind <= 1) {
+            return c + d;
+          }
+        }, 0);
+
+      console.log(newArr);
+    }
+
+    pairwise([], 100);
+    /*************************************FROM STACKS**************************************************/
+    // function pairwise(arr, arg) {
+    //   return arr.reduce(function (sum, cur, i, ar) {
+    //     for (var j = i + 1; j < ar.length; j++) {
+    //       if (cur + ar[j] === arg) {
+    //         sum += i + j;
+    //         ar[j] = ' ';
+    //         break;
+    //       }
+    //     }
+
+    //     return sum;
+
+    //   }, 0);
+    // }
+
+
+
+
+
+
+
+    /**********************************************************************************************/
+  </script>
+</body>
+
+</html>

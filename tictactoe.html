@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+  <style>
+    /* --main-color: #984b43;
+        --sec-color: #233237;
+        --highlight-color: #89d230;
+        --2nd-color: #18121e;
+        --3rd-color: #eac67a; */
+
+    body {
+      background: linear-gradient(0deg, #fff 10%, #eac57a 90%);
+      height: 100vh;
+      padding-top: 25px;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-shadow: 2px 2px 10px rgb(20, 20, 20);
+      margin-bottom: 30px;
+    }
+
+    body>.container-fluid {}
+
+    .cell {
+      position: relative;
+      height: 150px;
+      padding: 0;
+      border: 1px solid #18121e;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-direction: column;
+      cursor: pointer;
+      opacity: 0;
+      z-index: 5;
+      transition: opacity ease-in 0.5s;
+    }
+
+    .options {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      padding-top: 30px;
+      opacity: 100;
+      transition: left ease-out 0.5s, opacity 0.2s ease-out 0.3s;
+    }
+
+    .option-values {
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-direction: column;
+      cursor: pointer;
+      border: 1px solid #18121e;
+    }
+
+    .option-values span {
+      font-size: 500%;
+      text-shadow: 1px 1px 1px #18121e;
+    }
+
+    .option-values:hover {
+      background-color: #984b43;
+      transition: background-color 0.1s ease-in;
+    }
+
+    .wrapper {
+      position: absolute;
+      left: 50%;
+    }
+
+    .cell span {
+      font-size: 500%;
+      text-shadow: 1px 1px 1px #18121e;
+      position: absolute;
+      left: 35%;
+      opacity: 0;
+      transition: all 0.2s;
+    }
+
+    .cell div:nth-child(1) span {
+      position: relative;
+      left: 0%;
+    }
+
+    .cell div:nth-child(2) span {
+      position: relative;
+      left: -50%;
+    }
+
+    .score {
+      font-size: 150%;
+    }
+
+    .score:nth-child(1) span {
+      float: right;
+      padding: 5px 10px;
+      border: 1px solid #555;
+    }
+
+    .score:nth-child(2) span {
+      float: left;
+      padding: 5px 10px;
+      border: 1px solid #555;
+    }
+
+    .hidden {
+      opacity: 0;
+    }
+
+    .btn {
+      cursor: pointer;
+    }
+
+    .btn-danger {
+      background-color: #984b43;
+      color: #18121e;
+      border: 1px solid #984b43;
+      font-weight: bold;
+    }
+
+    .btn-danger:hover {
+      color: #eac57a;
+      background-color: #984b43;
+      border: 1px solid #984b43;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 80%;
+      }
+      h1 {
+        font-size: 200%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="text-center col-10 mx-auto">TIC TAC TOE</h1>
+  <div class="container col-6 col-md-3 mx-auto text-center mb-4">
+    <h2 class="mb-4">Score</h2>
+    <div class="row">
+      <div class="col-6 score">You
+        <span>0</span>
+      </div>
+      <div class="col-6 score">
+        <span>0</span> AI</div>
+    </div>
+
+  </div>
+  <div class="container-fluid col-8 col-md-5 mx-auto">
+    <div class="row">
+      <div class="col-4 cell">
+        <div>
+          <span data-val="1">X</span>
+        </div>
+        <div class="wrapper">
+          <span data-val="1">O</span>
+        </div>
+      </div>
+      <div class="col-4 cell">
+        <div>
+          <span data-val="2">X</span>
+        </div>
+        <div class="wrapper">
+          <span data-val="2">O</span>
+        </div>
+      </div>
+      <div class="col-4 cell">
+        <div>
+          <span data-val="3">X</span>
+        </div>
+        <div class="wrapper">
+          <span data-val="3">O</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-4 cell">
+        <div>
+          <span data-val="4">X</span>
+        </div>
+        <div class="wrapper">
+          <span data-val="4">O</span>
+        </div>
+      </div>
+      <div class="col-4 cell">
+        <div>
+          <span data-val="5">X</span>
+        </div>
+        <div class="wrapper">
+          <span data-val="5">O</span>
+        </div>
+      </div>
+      <div class="col-4 cell">
+        <div>
+          <span data-val="6">X</span>
+        </div>
+        <div class="wrapper">
+          <span data-val="6">O</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-4 cell">
+        <div>
+          <span data-val="7">X</span>
+        </div>
+        <div class="wrapper">
+          <span data-val="7">O</span>
+        </div>
+      </div>
+      <div class="col-4 cell">
+        <div>
+          <span data-val="8">X</span>
+        </div>
+        <div class="wrapper">
+          <span data-val="8">O</span>
+        </div>
+      </div>
+      <div class="col-4 cell">
+        <div>
+          <span data-val="9">X</span>
+        </div>
+        <div class="wrapper">
+          <span data-val="9">O</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container-fluid options">
+      <div class="row text-center">
+        <h2 class="col-12 mb-4">You play as</h2>
+      </div>
+      <div class="row text-center justify-content-center">
+        <div class="col-4 col-md-3 option-values">
+          <span>X</span>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-4 col-md-3 option-values">
+          <span>O</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center mb-4">
+    <div class="btn btn-danger col-2 col-md-1 mt-4"> RESET </div>
+  </div>
+  <h2 class="text-center mx-auto col-6"></h2>
+
+  <script>
+    var cells = document.querySelectorAll(".cell");
+    var chosenTeam;
+    var optionVal = document.querySelectorAll(".option-values");
+    var options = document.querySelector(".options");
+    var resetBtn = document.querySelector(".btn");
+    var winCombos = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+      [1, 4, 7],
+      [2, 5, 8],
+      [3, 6, 9],
+      [1, 5, 9],
+      [7, 5, 3]
+    ];
+    var playerScore = [];
+    var aiScore = [];
+    playerScore = [1, 4, 8];
+    var win = false;
+
+    // function checkScore(arr) {
+
+    // }
+    // function compareArr(arr1, arr2) {
+    //   arr1.forEach(function (e) {
+    //     for (i = 0; i < 3; i++) {
+    //       if (e !== arr2[i]) {
+
+    //       } else {
+    //         console.log(e + " e " + arr2[i] + " arr");
+    //       }
+
+
+    //     }
+
+
+    //   })
+    // }
+    // winCombos.forEach(function (el) {
+    //   compareArr(el, playerScore);
+
+    // });
+    console.log(chosenTeam);
+
+
+
+    function removeScreen(e) {
+
+      this.innerText.charCodeAt(0) === "O".charCodeAt(0) ? chosenTeam = 1 : chosenTeam = 0;
+      console.dir(chosenTeam + " chosen");
+      options.style.opacity = "0";
+      options.style.zIndex = "1";
+      options.style.left = "500px";
+      document.querySelector("body >.container-fluid").style.border = "none";
+      cells.forEach(function (e) {
+        e.style.opacity = "100";
+      });
+    }
+
+    function resetGame(e) {
+      options.style.opacity = "100";
+      options.style.zIndex = "10";
+      options.style.left = "0px";
+      document.querySelector("body >.container-fluid").style.border = "";
+      cells.forEach(function (e) {
+        e.children[0].children[0].style.opacity = "0";
+        e.children[1].children[0].style.opacity = "0";
+        e.style.opacity = "0";
+      });
+      playerScore = [];
+      aiScore = [];
+    }
+
+    function drawItem(e) {
+      console.dir(this);
+      this.children[chosenTeam].children[0].style.opacity = "100";
+      playerScore.push(parseInt(this.children[chosenTeam].children[0].dataset.val));
+      console.log(playerScore);
+      console.log(chosenTeam);
+    };
+
+
+
+
+
+
+
+
+    cells.forEach(function (e) {
+      e.addEventListener("click", drawItem);
+    });
+    optionVal.forEach(function (e) {
+      e.addEventListener("click", removeScreen);
+    });
+    resetBtn.addEventListener("click", resetGame);
+  </script>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
