@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+  <style>
+    /* --main-color: #984b43;
+        --sec-color: #233237;
+        --highlight-color: #89d230;
+        --2nd-color: #18121e;
+        --3rd-color: #eac67a; */
+
+    body {
+      background: linear-gradient(0deg, #fff 10%, #eac57a 90%);
+      height: 100vh;
+      padding-top: 25px;
+    }
+
+    h1 {
+      text-shadow: 2px 2px 10px rgb(20, 20, 20);
+      margin-bottom: 50px;
+    }
+
+    .main {
+      background-color: rgba(152, 74, 67, 0);
+      height: 350px;
+      text-align: center;
+      border-radius: 10px;
+      border: 3px solid #18121e;
+      padding-top: 1.5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      overflow: hidden;
+    }
+
+    .screen {
+      height: 50px;
+      background-color: rgba(6, 18, 19, 0);
+      border-radius: 10px;
+      font-size: 140%;
+      display: table;
+      border-top: 3px solid #18121e;
+      border-bottom: 3px solid #18121e;
+      overflow: hidden;
+    }
+
+    .screen-text-big {
+      overflow: hidden;
+      display: block;
+      text-align: right;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+
+    .screen-text-small {
+      display: block;
+      margin: 0;
+      text-align: right;
+      font-size: 50%;
+      letter-spacing: 1px;
+    }
+
+    .hidden {
+      opacity: 0;
+    }
+
+    .wrap-single-btn {
+      display: flex;
+      justify-content: center;
+      border-radius: 10px;
+      align-content: center;
+      height: 40px;
+      margin: 0.5rem 0 0 0;
+      padding: 0 0 0.5rem 0;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .calc-btn {
+      user-select: none;
+      transition: all .07s ease;
+      background-color: rgba(35, 50, 55, 0);
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-direction: column;
+      width: 95%;
+      height: 100%;
+      padding: 0;
+      border-radius: 5px;
+      border-bottom: 1px solid #18121e;
+      color: #18121e;
+    }
+
+    .pressed {
+      transform: scale(0.97);
+      background-color: #984b43;
+      /* border-color: #ffc600; */
+      box-shadow: 0 0 0.2rem #bdae91;
+    }
+
+    .calc-btn p {
+      height: 100%;
+      margin: 0;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 120%;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 80%;
+      }
+      h1 {
+        font-size: 200%;
+      }
+      .screen {
+        font-size: 100%;
+      }
+      .screen-text-small {
+        font-size: 80%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="text-center col-10 mx-auto">CALCULATOR</h1>
+
+  <div class="container">
+    <div class="col-9 col-md-6 col-lg-4 mx-auto main container">
+      <div class="row">
+        <div class="screen col-9 mx-auto mb-3">
+          <p class="screen-text-small hidden" id="prev"> 0</p>
+          <p class="screen-text-big" id="current"> </p>
+        </div>
+      </div>
+      <div class="col-10 container btn-wrapper">
+        <div class="row justify-content-between">
+          <div class="col-6 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                <--</p>
+            </div>
+          </div>
+          <div class="col-6 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">C</p>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-around">
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                7</p>
+            </div>
+          </div>
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                8</p>
+            </div>
+          </div>
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                9</p>
+            </div>
+          </div>
+          <div class="col-2 wrap-single-btn">
+            <div class="calc-btn">
+              <p>
+                *</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="row justify-content-around">
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                4</p>
+            </div>
+          </div>
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                5</p>
+            </div>
+          </div>
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                6</p>
+            </div>
+          </div>
+          <div class="col-2 wrap-single-btn">
+            <div class="calc-btn">
+              <p>
+                /</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="row justify-content-around">
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                1</p>
+            </div>
+          </div>
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                2</p>
+            </div>
+          </div>
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                3</p>
+            </div>
+          </div>
+          <div class="col-2 wrap-single-btn">
+            <div class="calc-btn">
+              <p>
+                +</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="row justify-content-around">
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                0</p>
+            </div>
+          </div>
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="num">
+                .</p>
+            </div>
+          </div>
+          <div class="col-3 wrap-single-btn">
+            <div class="calc-btn">
+              <p data-type="eq">=</p>
+            </div>
+          </div>
+          <div class="col-2 wrap-single-btn">
+            <div class="calc-btn">
+              <p>
+                - </p>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script>
+    var currentNum = document.querySelector("#current");
+    var prevNum = document.querySelector("#prev");
+    var buttons = document.querySelectorAll(".calc-btn");
+    var newValue = false;
+    var firstRun = false;
+
+    currentNum.innerText = 0;
+    // function to deal with path property on different browsers
+    function composedPath(el) {
+      var path = [];
+      while (el) {
+        path.push(el);
+        if (el.tagName === 'HTML') {
+          path.push(document);
+          path.push(window);
+          return path;
+        }
+        el = el.parentElement;
+      }
+    }
+
+    function calc(e) {
+
+      //setting the path property of the fired event
+      var path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
+
+      function addValue(e) {
+
+        var strLength = currentNum.innerText.length;
+        var strValue = path[0].innerText;
+        if (path[0].dataset.type === "empty" || path[0].dataset.type === "MR") {
+          return;
+        }
+        if (newValue && prevNum.innerText !== "0" && strValue === "=") {
+          console.log("test1");
+          currentNum.innerText = resultCheck(prevNum.innerText, currentNum.innerText);
+          prevNum.innerText = "0";
+          prevNum.classList.add("hidden");
+          firstRun = false;
+        }
+        //if num pressed after the operator
+        if (newValue && strValue !== "." && path[0].dataset.type === "num") {
+          console.log("test2");
+          currentNum.innerText = "";
+          newValue = false;
+        }
+        //if another operator pressed arfter first one
+        else if (newValue && !path[0].dataset.type) {
+
+          if (currentNum.innerText === prevNum.innerText.substring(0, prevNum.innerText.length - 1)) {
+            console.log("test3");
+            prevNum.innerText = currentNum.innerText.concat(strValue);
+          }
+        }
+        //perform multiple operations
+        else if (!path[0].dataset.type && firstRun) {
+          console.log("test4");
+          var a = prevNum.innerText;
+          prevNum.innerText = a.concat(currentNum.innerText).concat(strValue);
+          currentNum.innerText = eval(a.concat(currentNum.innerText));
+          newValue = true;
+        }
+
+        // solving LENGTH problem
+        if (strLength === 15 && strValue !== "<--") {
+          if (strValue === "C") {
+            return currentNum.innerText = 0;
+          }
+          return;
+        }
+        // solving <-- KEY
+        if (strValue === "<--") {
+          if (currentNum.innerText === "0" || newValue === true) {
+            return;
+          } else if (strLength === 1) {
+            return currentNum.innerText = 0;
+          }
+          return currentNum.innerText = currentNum.innerText.substring(0, currentNum.innerText.length - 1);
+        }
+        // solving C KEY
+        if (strValue === "C") {
+          currentNum.innerText = prevNum.innerText = 0;
+          prevNum.classList.add("hidden");
+          return;
+        }
+        //solving 0 and . KEYS
+        if (prevNum.innerText.length < 2 && strLength === 1 && currentNum.innerText === "0" && strValue !== "." && path[0].dataset.type) {
+          return currentNum.innerText = strValue;
+        }
+        if (strValue === ".") {
+          if (currentNum.innerText.match(/\./g) && !newValue) {
+            return;
+          }
+          if (newValue) {
+            newValue = false;
+            return currentNum.innerText = "0.";
+          }
+        }
+        //solving num KEYS
+        if (path[0].dataset.type === "num") {
+          currentNum.innerText = currentNum.innerText.concat(strValue);
+        }
+      }
+      function operations(e) {
+        var strValue = path[0].innerText;
+        if (!path[0].dataset.type && !firstRun) {
+          prevNum.innerText = a = currentNum.innerText.concat(strValue);
+          prevNum.classList.remove("hidden");
+          newValue = true;
+          firstRun = true;
+        }
+      }
+
+      function resultCheck(prev, curr) {
+        var isBig = false;
+        function replace(match) {
+          if (match) {
+            isBig = true;
+          }
+        }
+        console.log(prev.concat(curr) + " evaluation");
+        var result = prev.concat(curr).toString();
+        var sub = "";
+        function addText(match) {
+          sub = sub.concat("(");
+          return match.concat(")");
+        }
+        result = eval(result.replace(/\D\d+/g, addText).replace(/^\d/, function (match) {
+          return (sub).concat(match);
+        })).toString();
+
+        if (!isBig && result.length > 17) {
+          result = parseFloat(result).toExponential(11).toString();
+          return result;
+        } else {
+          return result;
+        }
+      }
+
+      function evaluate(e) {
+        var strValue = path[0].innerText;
+        if (!newValue && currentNum.innerText !== "0." && strValue === "=" && prevNum.innerText !== "0") {
+          console.log("test 66");
+          console.log(currentNum.innerText);
+          currentNum.innerText = resultCheck(prevNum.innerText, currentNum.innerText);
+          prevNum.innerText = "0";
+          prevNum.classList.add("hidden");
+          newValue = true;
+          firstRun = false;
+        }
+      }
+      path[0].classList.remove("pressed");
+      path[1].classList.remove("pressed");
+      addValue(e);
+      operations(e);
+      evaluate(e);
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("mouseup", calc);
+    });
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("mousedown", function (e) {
+        var path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
+        path[0].classList.add("pressed");
+        path[1].classList.add("pressed");
+        window.navigator.vibrate(40);
+
+      });
+    });
+
+    var a = "0.0004464285714285714";
+    var b = parseFloat(a);
+
+
+
+    console.log();
+  </script>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
