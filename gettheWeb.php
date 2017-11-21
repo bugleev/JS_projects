@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-      <title>Weather Scraper</title>
+      <title>The keys</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 
@@ -34,7 +34,6 @@
           }
           body {
               background: none;
-
           }
           .container {
               text-align: center;
@@ -46,23 +45,17 @@
           }
           #weather {
               margin-top:15px;
-
           }
 
       </style>
-
   </head>
   <body>
-
-
-
       <div class="container">
-          <h1>What's The Weather?</h1>
-              <div class = "codes col-12">
+          <h1>Your code is:</h1>
+              <div class = "codes">
               TEST
               <div>
       </div>
-
 <script>
 var c = document.querySelector("#esetkeydiv");
 c.style.display = "block";
@@ -70,7 +63,6 @@ var a = document.querySelector("#keysbox12");
 var b = a.children[0].children[0].children[2].children[0].innerText;
 
 var x = document.querySelector(".codes");
-x.textContent = a.innerText;
 
 document.querySelector("#container").style.display = "none";
 
@@ -83,13 +75,9 @@ arr = newarr.filter(function(el, index){
 var finalArr = arr.map(function (are) {
     return (are.slice(0, -2));
   });
+x.innerHTML = "<br><h3>Name: <strong>"+finalArr[2]+"</strong></h3><br><h3>Password: <strong>"+finalArr[3]+"</strong></h3>";
 
-console.log(finalArr);
 </script>
-
-
-
-
 
     <!-- jQuery first, then Bootstrap JS. -->
 
