@@ -308,6 +308,7 @@
   <script>
     var cells = document.querySelectorAll(".cell");
     var chosenTeam;
+    var aiTeam;
     var optionVal = document.querySelectorAll(".option-values");
     var options = document.querySelector(".options");
     var resetBtn = document.querySelector(".btn");
@@ -321,40 +322,17 @@
       [1, 5, 9],
       [7, 5, 3]
     ];
+    var scoreBoard = [];
     var playerScore = [];
     var aiScore = [];
-    playerScore = [];
     var win = false;
 
-    // function checkScore(arr) {
-
-    // }
-    // function compareArr(arr1, arr2) {
-    //   arr1.forEach(function (e) {
-    //     for (i = 0; i < 3; i++) {
-    //       if (e !== arr2[i]) {
-
-    //       } else {
-    //         console.log(e + " e " + arr2[i] + " arr");
-    //       }
-
-
-    //     }
-
-
-    //   })
-    // }
-    // winCombos.forEach(function (el) {
-    //   compareArr(el, playerScore);
-
-    // });
     console.log(chosenTeam);
-
-
+    resetScoreboard();
 
     function removeScreen(e) {
 
-      this.innerText.charCodeAt(0) === "O".charCodeAt(0) ? chosenTeam = 1 : chosenTeam = 0;
+      this.innerText.charCodeAt(0) === "O".charCodeAt(0) ? (chosenTeam = 1, aiTeam = 0) : (chosenTeam = 0, aiTeam = 1);
       console.dir(chosenTeam + " chosen");
       options.style.opacity = "0";
       options.style.zIndex = "1";
@@ -382,6 +360,8 @@
       cells.forEach(function (el) {
         el.classList.remove("cell-colored");
       });
+      resetScoreboard();
+      win = false;
       document.querySelector(".win-text").textContent = "";
       document.querySelector(".win-text").classList.remove("win-text-show");
     }
@@ -390,41 +370,79 @@
       console.dir(this);
       this.children[chosenTeam].children[0].style.opacity = "100";
       playerScore.push(parseInt(this.children[chosenTeam].children[0].dataset.val));
-      compare();
+      scoreBoard.splice(scoreBoard.indexOf(parseInt(this.children[chosenTeam].children[0].dataset.val)), 1);
+      aiPlays();
 
-      console.log(chosenTeam);
+
+      console.log(scoreBoard + " scoreboard");
     };
-    // compare scores and winarray
-    function compare() {
-      if (playerScore.length === 3) {
+    // checkWincondition scores and winarray
+
+    function checkWincondition() {
+      if (playerScore.length >= 3) {
         winCombos.forEach(function (el, ind) {
           console.log(playerScore + " playerscore");
           let countPlayer = 0;
           let countAI = 0;
+          let winArray = [];
           for (i = 0; i < el.length; i++) {
-            (playerScore.indexOf(el[i]) != -1) ? countPlayer++ : countPlayer;
-            (aiScore.indexOf(el[i]) != -1) ? countAI++ : countAI;
+            (playerScore.indexOf(el[i]) != -1) ? (countPlayer++ , winArray.push(el[i])) : countPlayer;
+            (aiScore.indexOf(el[i]) != -1) ? (countAI++ , winArray.push(el[i])) : countAI;
           }
-          if (countPlayer === 3 || countAI === 3) {
+          if (countPlayer === 3) {
             console.log("returning" + playerScore);
-            winDisplay(playerScore);
+            winDisplay(winArray, "You win!");
+            win = true;
+          }
+          if (countAI === 3) {
+            console.log("AI WIN");
+            winDisplay(winArray, "You Lose...");
+            win = true;
           }
         })
       }
     }
-    function winDisplay(arr) {
+    function winDisplay(arr, msg) {
       console.log(arr);
-      if (arr) {
-        cells.forEach(function (el) {
-          if (arr.indexOf(parseInt(el.children[0].children[0].dataset.val)) != -1) {
-            el.classList.add("cell-colored");
-          }
-        });
-        document.querySelector(".win-text").textContent = "You win";
-        document.querySelector(".win-text").classList.add("win-text-show");
+      (arr) && (cells.forEach(function (el) {
+        (arr.indexOf(parseInt(el.children[chosenTeam].children[0].dataset.val)) != -1) && el.classList.add("cell-colored");
+      }),
+        document.querySelector(".win-text").textContent = msg,
+        document.querySelector(".win-text").classList.add("win-text-show")
+      )
+    }
+
+    function resetScoreboard() {
+      scoreBoard = [];
+      for (i = 1; i <= 9; i++) {
+        scoreBoard.push(i);
       }
     }
 
+    function aiPlays() {
+      cells.forEach(function (e) {
+        e.removeEventListener("click", drawItem);
+      });
+      checkWincondition();
+      if (!win) {
+        console.log(playerScore.length - aiScore.length);
+        if ((playerScore.length - aiScore.length) == 1) {
+          setTimeout(function () {
+            let aiCell = scoreBoard[0];
+            aiScore.push(aiCell);
+            cells.forEach(function (el) {
+              (parseInt(el.children[aiTeam].children[0].dataset.val) === aiCell) &&
+                (el.children[aiTeam].children[0].style.opacity = "100",
+                  scoreBoard.splice(scoreBoard.indexOf(parseInt(el.children[aiTeam].children[0].dataset.val)), 1)
+                );
+            })
+            checkWincondition();
+          }, 300);
+        }
+
+      }
+
+    }
 
 
 
