@@ -395,8 +395,9 @@
             (playerScore.indexOf(el[i]) != -1) && (countPlayer++ , winArrayPlayer.push(el[i]));
           }
           if (countAI >= 2) {
-            aiMoves[1] = el.filter(a => scoreBoard.indexOf(a) != -1 && winArrayAi.indexOf(a) == -1);
-            console.log("attack " + aiMoves[1]);
+            aiMoves[1].push(el.filter(a => scoreBoard.indexOf(a) != -1 && winArrayAi.indexOf(a) == -1)[0]);
+            aiMoves[1] = aiMoves[1].filter(el => el != undefined);
+            console.log(aiMoves[1]);
           }
           if (countPlayer === 3) {
             console.log("winArray" + winArrayPlayer);
@@ -460,10 +461,12 @@
           setTimeout(function () {
             let aiCell;
 
-            if (aiMoves == 2) {
-
+            if (aiMoves[1].length > 0) {
+              aiCell = aiMoves[1][0];
+              console.log("test!" + aiCell);
+            } else {
+              aiCell = aiMoves[0].length > 0 ? aiMoves[0][0] : scoreBoard[0];
             }
-            aiCell = aiMoves[0].length > 0 ? aiMoves[0][0] : scoreBoard[0];
             //console.log(typeof (aiCell) + " AICELL2");
             aiScore.push(aiCell);
             cells.forEach(function (el) {
