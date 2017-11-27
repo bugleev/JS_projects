@@ -23,6 +23,10 @@
     body {
       background: linear-gradient(0deg, #fff 10%, #eac57a 90%);
       padding-top: 25px;
+    }
+
+    .overflow-wrapper {
+      position: relative;
       overflow-x: hidden;
     }
 
@@ -33,11 +37,13 @@
 
     .cell {
       position: relative;
-      height: 150px;
+      height: 100px;
+
       padding: 0;
       border: 1px solid #18121e;
       text-align: center;
       display: flex;
+      flex: 0 0 100px;
       justify-content: center;
       align-content: center;
       flex-direction: column;
@@ -81,6 +87,7 @@
     .option-values {
       height: 150px;
       display: flex;
+      flex: 0 0 150px;
       justify-content: center;
       align-content: center;
       flex-direction: column;
@@ -186,12 +193,24 @@
       }
       h1 {
         font-size: 200%;
+        margin-bottom: 10px;
+      }
+      .option-values {
+        height: 100px;
+        flex: 0 0 100px;
       }
     }
 
     @media (max-width: 400px) {
+      body {
+        font-size: 70%;
+      }
       .cell {
-        height: 100px;
+        height: 80px;
+      }
+      .cell span {
+        font-size: 350%;
+
       }
 
     }
@@ -199,127 +218,129 @@
 </head>
 
 <body>
-  <h1 class="text-center col-10 mx-auto">TIC TAC TOE</h1>
-  <div class="container col-10 col-sm-6 col-md-5 mx-auto text-center mb-4">
-    <h2 class="mb-4">Score</h2>
-    <div class="row">
-      <div class="col-6 score">You
-        <span>0</span>
+  <div class="overflow-wrapper">
+    <h1 class="text-center col-10 mx-auto">TIC TAC TOE</h1>
+    <div class="container col-10 col-sm-6 col-md-5 mx-auto text-center mb-4">
+      <h2 class="mb-4">Score</h2>
+      <div class="row">
+        <div class="col-6 score">You
+          <span>0</span>
+        </div>
+        <div class="col-6 score">
+          <span>0</span> AI</div>
       </div>
-      <div class="col-6 score">
-        <span>0</span> AI</div>
-    </div>
 
+    </div>
+    <div class="container-fluid col-10 col-sm-8 col-md-6 mx-auto">
+      <div class="row justify-content-center">
+        <div class="col-4 cell">
+          <div>
+            <span data-val="1">X</span>
+          </div>
+          <div class="wrapper">
+            <span data-val="1">O</span>
+          </div>
+        </div>
+        <div class="col-4 cell">
+          <div>
+            <span data-val="2">X</span>
+          </div>
+          <div class="wrapper">
+            <span data-val="2">O</span>
+          </div>
+        </div>
+        <div class="col-4 cell">
+          <div>
+            <span data-val="3">X</span>
+          </div>
+          <div class="wrapper">
+            <span data-val="3">O</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-4 cell">
+          <div>
+            <span data-val="4">X</span>
+          </div>
+          <div class="wrapper">
+            <span data-val="4">O</span>
+          </div>
+        </div>
+        <div class="col-4 cell">
+          <div>
+            <span data-val="5">X</span>
+          </div>
+          <div class="wrapper">
+            <span data-val="5">O</span>
+          </div>
+        </div>
+        <div class="col-4 cell">
+          <div>
+            <span data-val="6">X</span>
+          </div>
+          <div class="wrapper">
+            <span data-val="6">O</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-4 cell">
+          <div>
+            <span data-val="7">X</span>
+          </div>
+          <div class="wrapper">
+            <span data-val="7">O</span>
+          </div>
+        </div>
+        <div class="col-4 cell">
+          <div>
+            <span data-val="8">X</span>
+          </div>
+          <div class="wrapper">
+            <span data-val="8">O</span>
+          </div>
+        </div>
+        <div class="col-4 cell">
+          <div>
+            <span data-val="9">X</span>
+          </div>
+          <div class="wrapper">
+            <span data-val="9">O</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container-fluid options">
+        <div class="row text-center">
+          <h2 class="col-12 mb-4">You play as</h2>
+        </div>
+        <div class="row text-center justify-content-center">
+          <div class="col-5 col-sm-4 col-md-5 col-lg-4 option-values">
+            <span>X</span>
+          </div>
+          <div class="col-1">
+
+          </div>
+          <div class="col-5 col-sm-4 col-md-5 col-lg-4 option-values">
+            <span>O</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-wrap">
+      <div class="row justify-content-center mb-1">
+        <div class="btn btn-danger col-4 col-sm-2 col-lg-1 mt-3"> CONTINUE </div>
+      </div>
+      <div class="row justify-content-center mb-2">
+        <div class="btn btn-danger col-4 col-lg-1 col-sm-2 mt-2"> RESET </div>
+      </div>
+    </div>
+    <h2 class="text-center mx-auto col-10 win-text"></h2>
   </div>
-  <div class="container-fluid col-10 col-sm-8 col-md-6 mx-auto">
-    <div class="row">
-      <div class="col-4 cell">
-        <div>
-          <span data-val="1">X</span>
-        </div>
-        <div class="wrapper">
-          <span data-val="1">O</span>
-        </div>
-      </div>
-      <div class="col-4 cell">
-        <div>
-          <span data-val="2">X</span>
-        </div>
-        <div class="wrapper">
-          <span data-val="2">O</span>
-        </div>
-      </div>
-      <div class="col-4 cell">
-        <div>
-          <span data-val="3">X</span>
-        </div>
-        <div class="wrapper">
-          <span data-val="3">O</span>
-        </div>
-      </div>
-
-    </div>
-    <div class="row">
-      <div class="col-4 cell">
-        <div>
-          <span data-val="4">X</span>
-        </div>
-        <div class="wrapper">
-          <span data-val="4">O</span>
-        </div>
-      </div>
-      <div class="col-4 cell">
-        <div>
-          <span data-val="5">X</span>
-        </div>
-        <div class="wrapper">
-          <span data-val="5">O</span>
-        </div>
-      </div>
-      <div class="col-4 cell">
-        <div>
-          <span data-val="6">X</span>
-        </div>
-        <div class="wrapper">
-          <span data-val="6">O</span>
-        </div>
-      </div>
-
-    </div>
-    <div class="row">
-      <div class="col-4 cell">
-        <div>
-          <span data-val="7">X</span>
-        </div>
-        <div class="wrapper">
-          <span data-val="7">O</span>
-        </div>
-      </div>
-      <div class="col-4 cell">
-        <div>
-          <span data-val="8">X</span>
-        </div>
-        <div class="wrapper">
-          <span data-val="8">O</span>
-        </div>
-      </div>
-      <div class="col-4 cell">
-        <div>
-          <span data-val="9">X</span>
-        </div>
-        <div class="wrapper">
-          <span data-val="9">O</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="container-fluid options">
-      <div class="row text-center">
-        <h2 class="col-12 mb-4">You play as</h2>
-      </div>
-      <div class="row text-center justify-content-center">
-        <div class="col-5 col-sm-4 col-md-5 col-lg-4 option-values">
-          <span>X</span>
-        </div>
-        <div class="col-1">
-
-        </div>
-        <div class="col-5 col-sm-4 col-md-5 col-lg-4 option-values">
-          <span>O</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="btn-wrap">
-    <div class="row justify-content-center mb-1">
-      <div class="btn btn-danger col-4 col-sm-2 mt-4"> CONTINUE </div>
-    </div>
-    <div class="row justify-content-center mb-4">
-      <div class="btn btn-danger col-4  col-sm-2 mt-4"> RESET </div>
-    </div>
-  </div>
-  <h2 class="text-center mx-auto col-10 win-text"></h2>
 
   <script>
     var cells = document.querySelectorAll(".cell");
@@ -352,13 +373,14 @@
       options.style.zIndex = "1";
       options.style.left = "500px";
       resetBtn.style.opacity = "1";
-      document.querySelector("body >.container-fluid").style.border = "none";
+      document.querySelector(".overflow-wrapper >.container-fluid").style.border = "none";
       cells.forEach(function (e) {
         e.style.opacity = "100";
       });
     }
 
     function startScreen(e) {
+      window.navigator.vibrate(40);
       this.innerText.charCodeAt(0) === "O".charCodeAt(0) ? (chosenTeam = 1, aiTeam = 0) : (chosenTeam = 0, aiTeam = 1);
       //console.dir(chosenTeam + " chosen");
       displayCells();
@@ -369,7 +391,7 @@
       options.style.zIndex = "10";
       options.style.left = "0px";
       resetBtn.style.opacity = "0";
-      document.querySelector("body >.container-fluid").style.border = "";
+      document.querySelector(".overflow-wrapper >.container-fluid").style.border = "";
       cells.forEach(function (e) {
         e.children[0].children[0].style.opacity = "0";
         e.children[1].children[0].style.opacity = "0";
@@ -389,6 +411,7 @@
     function playerMove(e) {
       console.dir(this);
       if (scoreBoard.indexOf(parseInt(this.children[chosenTeam].children[0].dataset.val)) !== -1 && playerScore.length == aiScore.length) {
+        window.navigator.vibrate(40);
         this.children[chosenTeam].children[0].style.opacity = "100";
         playerScore.push(parseInt(this.children[chosenTeam].children[0].dataset.val));
         scoreBoard.splice(scoreBoard.indexOf(parseInt(this.children[chosenTeam].children[0].dataset.val)), 1);
@@ -419,12 +442,14 @@
           }
           if (countPlayer === 3) {
             console.log("winArray" + winArrayPlayer);
+            window.navigator.vibrate(200);
             winDisplay(winArrayPlayer, "You won");
             scoreVal[0].children[0].innerText = parseInt(scoreVal[0].children[0].innerText) + 1;
             win = true;
           }
           if (countAI === 3) {
             console.log("AI WIN");
+            window.navigator.vibrate(200);
             winDisplay(winArrayAi, "You Lost");
             scoreVal[1].children[0].innerText = parseInt(scoreVal[1].children[0].innerText) + 1;
             win = true;
@@ -512,10 +537,12 @@
       e.addEventListener("click", startScreen);
     });
     resetBtn.children[0].children[0].addEventListener("click", function (e) {
+      window.navigator.vibrate([100, 50, 100, 50]);
       resetGame();
       displayCells();
     });
     resetBtn.children[1].children[0].addEventListener("click", function () {
+      window.navigator.vibrate([100, 50, 100, 50]);
       scoreVal[0].children[0].innerText = scoreVal[1].children[0].innerText = "0";
       resetGame();
     });
