@@ -16,19 +16,20 @@
         --2nd-color: #18121e;
         --3rd-color: #eac67a; */
 
+    html {
+      background-color: #fff;
+    }
+
     body {
       background: linear-gradient(0deg, #fff 10%, #eac57a 90%);
-      height: 100vh;
       padding-top: 25px;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     h1 {
       text-shadow: 2px 2px 10px rgb(20, 20, 20);
       margin-bottom: 30px;
     }
-
-    body>.container-fluid {}
 
     .cell {
       position: relative;
@@ -55,8 +56,6 @@
       0%,
       20%,
       40%,
-
-
       100% {
         background-color: #984b43;
       }
@@ -128,12 +127,14 @@
     }
 
     .score:nth-child(1) span {
+      width: 50px;
       float: right;
       padding: 5px 10px;
       border: 1px solid #555;
     }
 
     .score:nth-child(2) span {
+      width: 50px;
       float: left;
       padding: 5px 10px;
       border: 1px solid #555;
@@ -145,7 +146,11 @@
 
     .btn {
       cursor: pointer;
+      padding: .5rem .5rem;
       transition: left ease-out 0.5s, opacity 0.2s ease-out 0.3s;
+    }
+
+    .btn-wrap {
       opacity: 0;
     }
 
@@ -183,12 +188,19 @@
         font-size: 200%;
       }
     }
+
+    @media (max-width: 400px) {
+      .cell {
+        height: 100px;
+      }
+
+    }
   </style>
 </head>
 
 <body>
   <h1 class="text-center col-10 mx-auto">TIC TAC TOE</h1>
-  <div class="container col-6 col-md-3 mx-auto text-center mb-4">
+  <div class="container col-10 col-sm-6 col-md-5 mx-auto text-center mb-4">
     <h2 class="mb-4">Score</h2>
     <div class="row">
       <div class="col-6 score">You
@@ -199,7 +211,7 @@
     </div>
 
   </div>
-  <div class="container-fluid col-8 col-md-5 mx-auto">
+  <div class="container-fluid col-10 col-sm-8 col-md-6 mx-auto">
     <div class="row">
       <div class="col-4 cell">
         <div>
@@ -287,30 +299,36 @@
         <h2 class="col-12 mb-4">You play as</h2>
       </div>
       <div class="row text-center justify-content-center">
-        <div class="col-4 col-md-3 option-values">
+        <div class="col-5 col-sm-4 col-md-5 col-lg-4 option-values">
           <span>X</span>
         </div>
         <div class="col-1">
 
         </div>
-        <div class="col-4 col-md-3 option-values">
+        <div class="col-5 col-sm-4 col-md-5 col-lg-4 option-values">
           <span>O</span>
         </div>
       </div>
     </div>
   </div>
-  <div class="row justify-content-center mb-4">
-    <div class="btn btn-danger col-2 col-md-1 mt-4"> RESET </div>
+  <div class="btn-wrap">
+    <div class="row justify-content-center mb-1">
+      <div class="btn btn-danger col-4 col-sm-2 mt-4"> CONTINUE </div>
+    </div>
+    <div class="row justify-content-center mb-4">
+      <div class="btn btn-danger col-4  col-sm-2 mt-4"> RESET </div>
+    </div>
   </div>
-  <h2 class="text-center mx-auto col-6 win-text"></h2>
+  <h2 class="text-center mx-auto col-10 win-text"></h2>
 
   <script>
     var cells = document.querySelectorAll(".cell");
     var chosenTeam;
     var aiTeam;
     var optionVal = document.querySelectorAll(".option-values");
+    var scoreVal = document.querySelectorAll(".score");
     var options = document.querySelector(".options");
-    var resetBtn = document.querySelector(".btn");
+    var resetBtn = document.querySelector(".btn-wrap");
     var winCombos = [
       [1, 2, 3],
       [4, 5, 6],
@@ -329,10 +347,7 @@
     //console.log(chosenTeam);
     resetScoreboard();
 
-    function removeScreen(e) {
-
-      this.innerText.charCodeAt(0) === "O".charCodeAt(0) ? (chosenTeam = 1, aiTeam = 0) : (chosenTeam = 0, aiTeam = 1);
-      //console.dir(chosenTeam + " chosen");
+    function displayCells() {
       options.style.opacity = "0";
       options.style.zIndex = "1";
       options.style.left = "500px";
@@ -343,7 +358,13 @@
       });
     }
 
-    function resetGame(e) {
+    function startScreen(e) {
+      this.innerText.charCodeAt(0) === "O".charCodeAt(0) ? (chosenTeam = 1, aiTeam = 0) : (chosenTeam = 0, aiTeam = 1);
+      //console.dir(chosenTeam + " chosen");
+      displayCells();
+    }
+
+    function resetGame() {
       options.style.opacity = "100";
       options.style.zIndex = "10";
       options.style.left = "0px";
@@ -365,19 +386,16 @@
       document.querySelector(".win-text").classList.remove("win-text-show");
     }
 
-    function drawItem(e) {
-      // console.dir(this);
-      this.children[chosenTeam].children[0].style.opacity = "100";
-      playerScore.push(parseInt(this.children[chosenTeam].children[0].dataset.val));
-      scoreBoard.splice(scoreBoard.indexOf(parseInt(this.children[chosenTeam].children[0].dataset.val)), 1);
-      aiPlays();
-
-
-
+    function playerMove(e) {
+      console.dir(this);
+      if (scoreBoard.indexOf(parseInt(this.children[chosenTeam].children[0].dataset.val)) !== -1 && playerScore.length == aiScore.length) {
+        this.children[chosenTeam].children[0].style.opacity = "100";
+        playerScore.push(parseInt(this.children[chosenTeam].children[0].dataset.val));
+        scoreBoard.splice(scoreBoard.indexOf(parseInt(this.children[chosenTeam].children[0].dataset.val)), 1);
+        aiPlays();
+      }
     };
     // checkWincondition scores and winarray
-
-
 
     function checkWincondition() {
       let aiMoves = [[], []];
@@ -401,12 +419,14 @@
           }
           if (countPlayer === 3) {
             console.log("winArray" + winArrayPlayer);
-            winDisplay(winArrayPlayer, "You win!");
+            winDisplay(winArrayPlayer, "You won");
+            scoreVal[0].children[0].innerText = parseInt(scoreVal[0].children[0].innerText) + 1;
             win = true;
           }
           if (countAI === 3) {
             console.log("AI WIN");
-            winDisplay(winArrayAi, "You Lose...");
+            winDisplay(winArrayAi, "You Lost");
+            scoreVal[1].children[0].innerText = parseInt(scoreVal[1].children[0].innerText) + 1;
             win = true;
           }
           // getting available moves for AI when player has 2 cells checked
@@ -414,6 +434,10 @@
             aiMoves[0].push(filterScore(el, playerScore));
             aiMoves[0] = aiMoves[0].filter(el => el != undefined);
 
+          }
+          if (scoreBoard.length == 0 && !win) {
+            winArrayAi = [];
+            winDisplay(winArrayAi, "draw");
           }
         })
       } else {
@@ -451,7 +475,7 @@
         scoreBoard.push(i);
       }
     }
-
+    console.log(Math.floor(Math.random() * 3));
     function aiPlays() {
 
       var aiMoves = checkWincondition();
@@ -465,7 +489,7 @@
               aiCell = aiMoves[1][0];
               console.log("test!" + aiCell);
             } else {
-              aiCell = aiMoves[0].length > 0 ? aiMoves[0][0] : scoreBoard[0];
+              aiCell = aiMoves[0].length > 0 ? aiMoves[0][0] : scoreBoard[Math.floor(Math.random() * (scoreBoard.length - 1))];
             }
             //console.log(typeof (aiCell) + " AICELL2");
             aiScore.push(aiCell);
@@ -476,25 +500,25 @@
                 );
             })
             checkWincondition();
-
-
-          }, 300);
+          }, 200);
         }
       }
     }
 
-
-
-
-
-
     cells.forEach(function (e) {
-      e.addEventListener("click", drawItem);
+      e.addEventListener("click", playerMove);
     });
     optionVal.forEach(function (e) {
-      e.addEventListener("click", removeScreen);
+      e.addEventListener("click", startScreen);
     });
-    resetBtn.addEventListener("click", resetGame);
+    resetBtn.children[0].children[0].addEventListener("click", function (e) {
+      resetGame();
+      displayCells();
+    });
+    resetBtn.children[1].children[0].addEventListener("click", function () {
+      scoreVal[0].children[0].innerText = scoreVal[1].children[0].innerText = "0";
+      resetGame();
+    });
   </script>
 
 
