@@ -216,7 +216,7 @@
 </head>
 
 <body>
-  <div class="overflow-wrapper">
+  <div class="overflow-wrapper" onclick="void(0);">
     <h1 class="text-center col-10 mx-auto">TIC TAC TOE</h1>
     <div class="container col-10 col-sm-6 col-md-5 mx-auto text-center mb-4">
       <h2 class="mb-4">Score</h2>
@@ -341,54 +341,58 @@
   </div>
 
   <script>
-    var cells = document.querySelectorAll(".cell");
-    var chosenTeam;
-    var aiTeam;
-    var optionVal = document.querySelectorAll(".option-values");
-    var scoreVal = document.querySelectorAll(".score");
-    var options = document.querySelector(".options");
-    var resetBtn = document.querySelector(".btn-wrapper");
-    var winCombos = [
-      [1, 2, 3],
-      [4, 5, 6],
-      [7, 8, 9],
-      [1, 4, 7],
-      [2, 5, 8],
-      [3, 6, 9],
-      [1, 5, 9],
-      [7, 5, 3]
-    ];
-    var scoreBoard = [];
-    var playerScore = [];
-    var aiScore = [];
-    var win = false;
 
-    //console.log(chosenTeam);
+    // DECLARE VARIABLES HERE
+    var cells = document.querySelectorAll(".cell"),
+      chosenTeam,
+      aiTeam,
+      optionVal = document.querySelectorAll(".option-values"),
+      scoreVal = document.querySelectorAll(".score > span"),
+      options = document.querySelector(".options"),
+      btnWrapper = document.querySelector(".btn-wrapper"),
+      resetBtn = document.querySelectorAll(".btn"),
+      winCombos = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+        [1, 4, 7],
+        [2, 5, 8],
+        [3, 6, 9],
+        [1, 5, 9],
+        [7, 5, 3]
+      ],
+      scoreBoard = [],
+      playerScore = [],
+      aiScore = [],
+      win = false;
+
+    //FILL THE BOARD WITH AVAILABLE CELLS;
     resetScoreboard();
 
+    //FUNCTION FOR TOGGLING CELLS VISIBILIY AFTER TEAM PICK
     function displayCells() {
       options.style.opacity = "0";
       options.style.zIndex = "1";
       options.style.left = "500px";
-      resetBtn.style.opacity = "1";
+      btnWrapper.style.opacity = "1";
       document.querySelector(".overflow-wrapper >.container-fluid").style.border = "none";
       cells.forEach(function (e) {
         e.style.opacity = "100";
       });
     }
 
+    // HANDLE TEAM SELECTION AND ASSIGNING TEAMS, ALSO DISPLAY CELLS GRID
     function startScreen(e) {
       window.navigator.vibrate(40);
       this.innerText.charCodeAt(0) === "O".charCodeAt(0) ? (chosenTeam = 1, aiTeam = 0) : (chosenTeam = 0, aiTeam = 1);
-      //console.dir(chosenTeam + " chosen");
       displayCells();
     }
-
+    // RESET THE GAME
     function resetGame() {
       options.style.opacity = "100";
       options.style.zIndex = "10";
       options.style.left = "0px";
-      resetBtn.style.opacity = "0";
+      btnWrapper.style.opacity = "0";
       document.querySelector(".overflow-wrapper >.container-fluid").style.border = "";
       cells.forEach(function (e) {
         e.children[0].children[0].style.opacity = "0";
@@ -405,9 +409,10 @@
       document.querySelector(".win-text").textContent = "";
       document.querySelector(".win-text").classList.remove("win-text-show");
     }
+    // HANDLE PLAYER CLICKS ON A CELL, CHECK FOR PRESENCE OF A CELL IN THE "scoreboard" VAR AND FOR AI TO HAS MADE A MOVE,
+    // THEN PUSH THE VALUE TO A "playerscore" VAR AND REMOVE FROM THE "scoreboard" VAR
 
     function playerMove(e) {
-      console.dir(this);
       if (scoreBoard.indexOf(parseInt(this.children[chosenTeam].children[0].dataset.val)) !== -1 && playerScore.length == aiScore.length) {
         window.navigator.vibrate(40);
         this.children[chosenTeam].children[0].style.opacity = "100";
@@ -416,47 +421,42 @@
         aiPlays();
       }
     };
-    // checkWincondition scores and winarray
 
+    // FUNCTION TO COMPARE AI AND PLAYER SCORE VARS WITH THE WINCOMBOS AND DEALING WITH DIFFERENT PRE-WINNING SITUATIONS,
+    // STORING MOVES FOR AI IN THE ARRAY AND RETURNING THAT VARIABLE
     function checkWincondition() {
       let aiMoves = [[], []];
-
       if (playerScore.length >= 2) {
         winCombos.forEach(function (el, ind) {
-          //console.log(playerScore + " playerscore");
           let countPlayer = 0;
           let countAI = 0;
           let winArrayPlayer = [];
           let winArrayAi = [];
           for (i = 0; i < el.length; i++) {
-            // console.log(el + " el " + countAI + " count " + aiScore.indexOf(el[i]) + " index of " + el[i] + " i ");
             (aiScore.indexOf(el[i]) != -1) && (countAI += 1, winArrayAi.push(el[i]));
             (playerScore.indexOf(el[i]) != -1) && (countPlayer++ , winArrayPlayer.push(el[i]));
           }
           if (countAI >= 2) {
             aiMoves[1].push(el.filter(a => scoreBoard.indexOf(a) != -1 && winArrayAi.indexOf(a) == -1)[0]);
             aiMoves[1] = aiMoves[1].filter(el => el != undefined);
-            console.log(aiMoves[1]);
           }
+          // DISPLAY WIN AFTER 3 MATCHES WITH WINCOMBOS ARRAYS
           if (countPlayer === 3) {
-            console.log("winArray" + winArrayPlayer);
             window.navigator.vibrate(200);
             winDisplay(winArrayPlayer, "You won");
-            scoreVal[0].children[0].innerText = parseInt(scoreVal[0].children[0].innerText) + 1;
+            scoreVal[0].innerText = parseInt(scoreVal[0].innerText) + 1;
             win = true;
           }
           if (countAI === 3) {
-            console.log("AI WIN");
             window.navigator.vibrate(200);
             winDisplay(winArrayAi, "You Lost");
-            scoreVal[1].children[0].innerText = parseInt(scoreVal[1].children[0].innerText) + 1;
+            scoreVal[1].innerText = parseInt(scoreVal[1].innerText) + 1;
             win = true;
           }
           // getting available moves for AI when player has 2 cells checked
           if (countPlayer > 1 && !win) {
             aiMoves[0].push(filterScore(el, playerScore));
             aiMoves[0] = aiMoves[0].filter(el => el != undefined);
-
           }
           if (scoreBoard.length == 0 && !win) {
             winArrayAi = [];
@@ -469,8 +469,8 @@
       }
       return aiMoves;
     }
+    // DISPLAYNG THE ENDGAME EVENT
     function winDisplay(arr, msg) {
-      //console.log(arr);
       (arr) && (cells.forEach(function (el) {
         (arr.indexOf(parseInt(el.children[chosenTeam].children[0].dataset.val)) != -1) && el.classList.add("cell-colored");
       }),
@@ -482,13 +482,10 @@
     function filterScore(arr1, arr2) {
       let newArr;
       newArr = arr1.filter(function (el, ind) {
-        //console.log(scoreBoard + " scoreboard");
         if (arr2.indexOf(el) == -1 && scoreBoard.indexOf(el) != -1) {
-          //console.log(el + "returnde el");
           return el;
         }
       })
-      //console.log(newArr + " newArr");
       return newArr[0];
 
     }
@@ -498,23 +495,27 @@
         scoreBoard.push(i);
       }
     }
-    console.log(Math.floor(Math.random() * 3));
-    function aiPlays() {
+    // FUNCTION TO CREATE ARRAY OF NUMBERS USING RECURSION AND ES6 (JUSTFORFUN):
 
+    // function fillArr(startNum, endNum, array) {
+    //   return (endNum >= startNum) && (array.push(endNum - (endNum - startNum)), fillArr((startNum + 1), endNum, array), array)
+    // }
+    // USAGE: let newArr = fillArr(3, 10, []);
+
+
+    // AI MOVES, IF THERE IS A PASSED MOVE FROM A COMPARISON FUNCTION, TAKE IT, OTHERWISE MAKE RANDOM MOVE
+    function aiPlays() {
       var aiMoves = checkWincondition();
       if (!win) {
-        //console.log(playerScore.length - aiScore.length);
         if ((playerScore.length - aiScore.length) === 1) {
           setTimeout(function () {
             let aiCell;
 
             if (aiMoves[1].length > 0) {
               aiCell = aiMoves[1][0];
-              console.log("test!" + aiCell);
             } else {
               aiCell = aiMoves[0].length > 0 ? aiMoves[0][0] : scoreBoard[Math.floor(Math.random() * (scoreBoard.length - 1))];
             }
-            //console.log(typeof (aiCell) + " AICELL2");
             aiScore.push(aiCell);
             cells.forEach(function (el) {
               (parseInt(el.children[aiTeam].children[0].dataset.val) == aiCell) &&
@@ -527,21 +528,21 @@
         }
       }
     }
-
+    // EVENTS
     cells.forEach(function (e) {
       e.addEventListener("click", playerMove);
     });
     optionVal.forEach(function (e) {
       e.addEventListener("click", startScreen);
     });
-    resetBtn.children[0].children[0].addEventListener("click", function (e) {
+    resetBtn[0].addEventListener("click", function (e) {
       window.navigator.vibrate([100, 50, 100, 50]);
       resetGame();
       displayCells();
     });
-    resetBtn.children[1].children[0].addEventListener("click", function () {
+    resetBtn[1].addEventListener("click", function () {
       window.navigator.vibrate([100, 50, 100, 50]);
-      scoreVal[0].children[0].innerText = scoreVal[1].children[0].innerText = "0";
+      scoreVal[0].innerText = scoreVal[1].innerText = "0";
       resetGame();
     });
   </script>
