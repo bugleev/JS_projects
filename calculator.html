@@ -270,13 +270,13 @@
 
   </div>
 
-
   <script>
-    var currentNum = document.querySelector("#current");
-    var prevNum = document.querySelector("#prev");
-    var buttons = document.querySelectorAll(".calc-btn");
-    var newValue = false;
-    var firstRun = false;
+    var currentNum = document.querySelector("#current"),
+      prevNum = document.querySelector("#prev"),
+      buttons = document.querySelectorAll(".calc-btn"),
+      newValue = false,
+      firstRun = false,
+      eventHandler;
 
     currentNum.innerText = 0;
     // function to deal with path property on different browsers
@@ -299,14 +299,12 @@
       var path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
 
       function addValue(e) {
-
-        var strLength = currentNum.innerText.length;
-        var strValue = path[0].innerText;
+        var strLength = currentNum.innerText.length,
+          strValue = path[0].innerText;
         if (path[0].dataset.type === "empty" || path[0].dataset.type === "MR") {
           return;
         }
         if (newValue && prevNum.innerText !== "0" && strValue === "=") {
-          console.log("test1");
           currentNum.innerText = resultCheck(prevNum.innerText, currentNum.innerText);
           prevNum.innerText = "0";
           prevNum.classList.add("hidden");
@@ -314,7 +312,6 @@
         }
         //if num pressed after the operator
         if (newValue && strValue !== "." && path[0].dataset.type === "num") {
-          console.log("test2");
           currentNum.innerText = "";
           newValue = false;
         }
@@ -322,13 +319,11 @@
         else if (newValue && !path[0].dataset.type) {
 
           if (currentNum.innerText === prevNum.innerText.substring(0, prevNum.innerText.length - 1)) {
-            console.log("test3");
             prevNum.innerText = currentNum.innerText.concat(strValue);
           }
         }
         //perform multiple operations
         else if (!path[0].dataset.type && firstRun) {
-          console.log("test4");
           var a = prevNum.innerText;
           prevNum.innerText = a.concat(currentNum.innerText).concat(strValue);
           currentNum.innerText = eval(a.concat(currentNum.innerText));
@@ -384,38 +379,25 @@
           firstRun = true;
         }
       }
-
       function resultCheck(prev, curr) {
-        var isBig = false;
+        let isBig = false,
+          result = prev.concat(curr).toString(),
+          sub = "";
         function replace(match) {
-          if (match) {
-            isBig = true;
-          }
+          (match) && (isBig = true);
         }
-        console.log(prev.concat(curr) + " evaluation");
-        var result = prev.concat(curr).toString();
-        var sub = "";
         function addText(match) {
           sub = sub.concat("(");
           return match.concat(")");
         }
-        result = eval(result.replace(/\D\d+/g, addText).replace(/^\d/, function (match) {
+        result = eval(result.replace(/\d+e\D\d+|[\+\*\-\/]\d+e\D\d+|[\+\*\-\/]\d+\.\d+e\D\d+|\d+\.\d+e\D\d+|[\+\*\-\/]\d+\.\d+|[\+\*\-\/]\d+/g, addText).replace(/^\d|^\D/, function (match) {
           return (sub).concat(match);
         })).toString();
-
-        if (!isBig && result.length > 17) {
-          result = parseFloat(result).toExponential(11).toString();
-          return result;
-        } else {
-          return result;
-        }
+        return (!isBig && result.length > 18) ? (result = parseFloat(result).toExponential(11).toString(), result) : result;
       }
-
       function evaluate(e) {
         var strValue = path[0].innerText;
         if (!newValue && currentNum.innerText !== "0." && strValue === "=" && prevNum.innerText !== "0") {
-          console.log("test 66");
-          console.log(currentNum.innerText);
           currentNum.innerText = resultCheck(prevNum.innerText, currentNum.innerText);
           prevNum.innerText = "0";
           prevNum.classList.add("hidden");
@@ -430,12 +412,11 @@
       evaluate(e);
     }
 
-    buttons.forEach(function (btn) {
-      btn.addEventListener("mouseup", calc);
-    });
+    document.addEventListener("mouseup", () => calc(eventHandler));
 
     buttons.forEach(function (btn) {
       btn.addEventListener("mousedown", function (e) {
+        eventHandler = e;
         var path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
         path[0].classList.add("pressed");
         path[1].classList.add("pressed");
@@ -444,12 +425,6 @@
       });
     });
 
-    var a = "0.0004464285714285714";
-    var b = parseFloat(a);
-
-
-
-    console.log();
   </script>
 
 
