@@ -104,10 +104,6 @@
       transition: background-color 0.1s ease-in;
     }
 
-    .cell-wrapper {
-      position: absolute;
-      left: 50%;
-    }
 
     .cell span {
       font-size: 500%;
@@ -144,6 +140,13 @@
       float: left;
       padding: 5px 10px;
       border: 1px solid #555;
+    }
+
+    .cell-wrapper {
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      left: 50%;
     }
 
     .hidden {
