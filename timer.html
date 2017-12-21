@@ -142,7 +142,6 @@
             }
             .inside-text {
                 margin-top: 1.5rem;
-
             }
         }
     </style>
@@ -167,7 +166,7 @@
                 <div class="increment"> + </div>
             </div>
 
-            <div class="clock-wrapper mx-auto">
+            <a class="clock-wrapper mx-auto">
                 <div class="col-10 inside-text">
                     <div class="type mb-4">
                         <p>Session</p>
@@ -179,7 +178,7 @@
                 <div class="inside-fill">
                 </div>
 
-            </div>
+            </a>
         </div>
     </div>
 
@@ -194,13 +193,15 @@
         const sessionTime = document.querySelector('div[data-func="session"]');
         const timeLeft = document.querySelector('.time-value');
 
+        const supportsVibrate = "vibrate" in navigator;
+
         ///////////// DEALING WITH BUTTONS AND EFFECTS
         function increment(e) {
             if (isStarted) {
                 return;
             }
             e.target.style.transform = "scale(1.3)";
-            window.navigator.vibrate(40);
+            supportsVibrate && window.navigator.vibrate(40);
             operations(e, "+1");
         };
         function decrement(e) {
@@ -208,7 +209,7 @@
                 return;
             }
             e.target.style.transform = "scale(1.3)";
-            window.navigator.vibrate(40);
+            supportsVibrate && window.navigator.vibrate(40);
             operations(e, "-1");
         };
         function operations(e, str) {
@@ -252,7 +253,7 @@
                     } else {
                         document.querySelector(".type p").textContent = "Session";
                         clearFill();
-                        window.navigator.vibrate([100, 50, 100, 50]);
+                        supportsVibrate && window.navigator.vibrate([100, 50, 100, 50]);
                         timer(parseTime(sessionTime));
                     }
                     return;
@@ -273,12 +274,12 @@
         }
         function startTimer() {
             if (!isStarted) {
-                window.navigator.vibrate(200);
+                supportsVibrate && window.navigator.vibrate(200);
                 timer(parseTime(timeLeft));
                 isStarted = true;
             } else {
                 clearInterval(countdown);
-                window.navigator.vibrate(200);
+                supportsVibrate && window.navigator.vibrate(200);
                 isStarted = false;
             }
         }
@@ -296,7 +297,7 @@
         function breakStart() {
             document.querySelector(".type p").textContent = "break";
             clearFill();
-            window.navigator.vibrate([100, 50, 100, 50]);
+            supportsVibrate && window.navigator.vibrate([100, 50, 100, 50]);
             timer(parseTime(breakTime));
         }
         function checkSession() {

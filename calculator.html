@@ -287,7 +287,8 @@
       buttons = document.querySelectorAll(".calc-btn"),
       newValue = false,
       firstRun = false,
-      eventHandler;
+      eventHandler,
+      supportsVibrate = "vibrate" in navigator;
 
     currentNum.innerText = 0;
     // function to deal with path property on different browsers
@@ -431,11 +432,10 @@
         var path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
         path[0].classList.add("pressed");
         path[1].classList.add("pressed");
-        window.navigator.vibrate(40);
+        supportsVibrate && window.navigator.vibrate(40);
 
       });
     });
-
   </script>
 
 

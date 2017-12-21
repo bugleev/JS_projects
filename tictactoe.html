@@ -322,9 +322,9 @@
           <h2 class="col-12 mb-4">You play as</h2>
         </div>
         <div class="row text-center justify-content-center">
-          <div class="col-5 col-sm-4 col-md-5 col-lg-4 option-values">
+          <a class="col-5 col-sm-4 col-md-5 col-lg-4 option-values">
             <span>X</span>
-          </div>
+          </a>
           <div class="col-1">
 
           </div>
@@ -369,7 +369,7 @@
       playerScore = [],
       aiScore = [],
       win = false;
-
+    const supportsVibrate = "vibrate" in navigator;
     //FILL THE BOARD WITH AVAILABLE CELLS;
     resetScoreboard();
 
@@ -387,7 +387,7 @@
 
     // HANDLE TEAM SELECTION AND ASSIGNING TEAMS, ALSO DISPLAY CELLS GRID
     function startScreen(e) {
-      window.navigator.vibrate(40);
+      supportsVibrate && window.navigator.vibrate(40);
       this.innerText.charCodeAt(0) === "O".charCodeAt(0) ? (chosenTeam = 1, aiTeam = 0) : (chosenTeam = 0, aiTeam = 1);
       displayCells();
     }
@@ -418,7 +418,7 @@
 
     function playerMove(e) {
       if (scoreBoard.indexOf(parseInt(this.children[chosenTeam].children[0].dataset.val)) !== -1 && playerScore.length == aiScore.length) {
-        window.navigator.vibrate(40);
+        supportsVibrate && window.navigator.vibrate(40);
         this.children[chosenTeam].children[0].style.opacity = "100";
         playerScore.push(parseInt(this.children[chosenTeam].children[0].dataset.val));
         scoreBoard.splice(scoreBoard.indexOf(parseInt(this.children[chosenTeam].children[0].dataset.val)), 1);
@@ -446,13 +446,13 @@
           }
           // DISPLAY WIN AFTER 3 MATCHES WITH WINCOMBOS ARRAYS
           if (countPlayer === 3) {
-            window.navigator.vibrate(200);
+            supportsVibrate && window.navigator.vibrate(200);
             winDisplay(winArrayPlayer, "You won");
             scoreVal[0].innerText = parseInt(scoreVal[0].innerText) + 1;
             win = true;
           }
           if (countAI === 3) {
-            window.navigator.vibrate(200);
+            supportsVibrate && window.navigator.vibrate(200);
             winDisplay(winArrayAi, "You Lost");
             scoreVal[1].innerText = parseInt(scoreVal[1].innerText) + 1;
             win = true;
@@ -540,12 +540,12 @@
       e.addEventListener("click", startScreen);
     });
     resetBtn[0].addEventListener("click", function (e) {
-      window.navigator.vibrate([100, 50, 100, 50]);
+      supportsVibrate && window.navigator.vibrate([100, 50, 100, 50]);
       resetGame();
       displayCells();
     });
     resetBtn[1].addEventListener("click", function () {
-      window.navigator.vibrate([100, 50, 100, 50]);
+      supportsVibrate && window.navigator.vibrate([100, 50, 100, 50]);
       scoreVal[0].innerText = scoreVal[1].innerText = "0";
       resetGame();
     });
