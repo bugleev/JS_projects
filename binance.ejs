@@ -1,0 +1,16 @@
+<% include partials/header %>
+    <h1>Exchange Rates</h1>
+
+
+
+    <%  for (var key in ticker) { %>
+        <% if (ticker.hasOwnProperty(key)) {%>
+            <p style="color:red;">
+                <%= key %>
+            </p>
+            <p style="color:blue;">
+                <%= ticker[key] %>
+            </p>
+            <% }}%>
+
+                <% include partials/footer %>

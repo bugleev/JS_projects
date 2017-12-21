@@ -7,23 +7,18 @@ var data;
 
 const binance = require("node-binance-api");
 binance.options({
-  APIKEY: "aChsKUyFERREzQtCvUKefYISnSXyBkKsF5aCauexgJv6v5flsRCA2PD1IIVOmJq7",
-  APISECRET: "yx1JzJqZizm8pwv0lt6YJeULEZxBMgwHWGglsT0bk4P6QONUg1azWzi5Gm0FwZ5E",
+ APIKEY: "aChsKUyFERREzQtCvUKefYISnSXyBkKsF5aCauexgJv6v5flsRCA2PD1IIVOmJq7",
+ APISECRET: "yx1JzJqZizm8pwv0lt6YJeULEZxBMgwHWGglsT0bk4P6QONUg1azWzi5Gm0FwZ5E"
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  binance.prices(function(ticker) {
-    data = JSON.stringify(ticker);
-    data = JSON.parse(data);
-
-    console.log(typeof data);
-    // console.log("Price of BNB: ", ticker.ZECBTC);
-    // res.render("binance", { ticker: ticker });
-  });
-  res.send(data);
+ binance.prices(function(ticker) {
+  res.render("binance", { ticker: ticker });
+ });
+ res.send(data);
 });
 
 app.listen(3000, () => console.log("Server started!"));
