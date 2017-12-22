@@ -324,6 +324,21 @@
             a.addEventListener("transitionend", removeTransition);
         });
         document.querySelector(".clock-wrapper").addEventListener("click", startTimer);
+        let getTime = milli => {
+            let time = new Date(milli); let day = time.getDate(); let month = time.getMonth() + 1;
+            let year = time.getFullYear(); let hours = time.getHours(); let minutes = time.getMinutes(); let seconds = time.getSeconds();
+            return [day + "/" + month + "/" + year, hours + ":" + minutes + ":" + seconds,];
+        };
+
+
+        var volumeSum;
+        var last11 = ticks.slice(-11);
+        last11.pop();
+        last11.forEach((currentTick) => {
+            let [time, open, high, low, close, volume, closeTime, assetVolume, trades, buyBaseVolume, buyAssetVolume, ignored] = currentTick;
+            volumeSum += volume;
+        });
+        volumeSum = volumeSum / 10;
     </script>
 
 
