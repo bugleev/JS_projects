@@ -14,67 +14,38 @@
         </tr>
       </thead>
       <tbody>
+        <%btcIndexes.forEach((index) =>{%>
+          <tr>
+            <td>
+              <%= index.pair   %>
+            </td>
+            <td>
+              <%= index.avgVolume   %>
+            </td>
+            <td>
+              <%= index.curVolume   %>
+            </td>
+            <td <% if (index.volumeDiff>= 0) { %> style="color:green;"
+              <%}  else { %>
+                style="color:red;"
+                <% } %>
+                  >
+                  <%= index.volumeDiff %>
+            </td>
 
-          <%  for (var key in ticker) { %>
-            <% if (ticker.hasOwnProperty(key) && key[5] != 6) { %>
-              <%   binance.candlesticks(key, "12h", function(ticks, symbol) {%>
-                <% const period = "12h"; var volumeSum = 0;var last11 = ticks.slice(-11);last11.pop();%>
-                <% last11.forEach((currentTick) => { %>
-                <% let [time, open, high, low, close, volume, closeTime, assetVolume, trades, buyBaseVolume, buyAssetVolume, ignored] = currentTick;%>
-                <% volumeSum += Number.parseFloat(volume); %>
-                <%  }); %>
-                <% volumeSum = Number.parseFloat(volumeSum) / 10;  %>
-                <% let [, , , , , volumeLast, , , , , , ] = ticks[ticks.length - 1];%>
-                <% var volumeDiff = volumeSum - Number.parseFloat(volumeLast);%>
-                <% var percentDiff = volumeDiff / volumeSum * 100; percentDiff = percentDiff.toFixed(2); %>
-                
-                <tr>
-                  <td>
-                      <%= symbol %>
-                    </td>
-                     
-                      <td>
-                        <%= volumeSum %>
-                      </td>
-                      <td>
-                        <%= Number.parseFloat(volumeLast) %>
-                      </td>
+            <td <% if (index.volumeDiff>= 0) { %> style="color:green;"
+              <%}  else { %>
+                style="color:red;"
+                <% } %>
+                  >
+                  <%= index.percDiff %>%
+            </td>
 
-                      <td <% if (volumeDiff>= 0) { %> style="color:green;"
-                        <%}  else { %>
-                          style="color:red;"
-                          <% } %>
-                            >
-                            <%= volumeDiff %>
-                      </td>
+          </tr>
 
-                      <td <% if (volumeDiff>= 0) { %> style="color:green;"
-                        <%}  else { %>
-                          style="color:red;"
-                          <% } %>
-                            >
-                            <%= percentDiff %>%
-                      </td>
-                    </tr>
-                      <% });%>
-                    <% }} %>
+          <% }); %>
+
       </tbody>
     </table>
   </div>
   <% include partials/footer %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
