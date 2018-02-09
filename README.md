@@ -9,7 +9,9 @@
 </div>
 
 <h2 align="center">Overview</h2>
-These are small javascript applications, that i wrote myself. Ideas taken from [freeCodeCamp.org](https://www.freecodecamp.org/).
+
+These are small javascript applications, that i wrote myself. Ideas taken from [freeCodeCamp.org](https://www.freecodecamp.org/)
+
 > All apps use vibrations if you are on a mobile (iOS not supported).
 
 * ### Calculator
