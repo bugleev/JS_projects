@@ -142,6 +142,7 @@
             }
             .inside-text {
                 margin-top: 1.5rem;
+
             }
         }
     </style>
@@ -166,7 +167,7 @@
                 <div class="increment"> + </div>
             </div>
 
-            <a class="clock-wrapper mx-auto">
+            <div class="clock-wrapper mx-auto">
                 <div class="col-10 inside-text">
                     <div class="type mb-4">
                         <p>Session</p>
@@ -177,23 +178,17 @@
                 </div>
                 <div class="inside-fill">
                 </div>
-
-            </a>
+            </div>
         </div>
     </div>
-
-    </div>
-
     <script>
         let countdown;
-        var isStarted = false;
+        let isStarted = false;
         const plusBtn = document.querySelectorAll(".increment");
         const minusBtn = document.querySelectorAll(".decrement");
         const breakTime = document.querySelector('div[data-func="break"]');
         const sessionTime = document.querySelector('div[data-func="session"]');
         const timeLeft = document.querySelector('.time-value');
-
-        const supportsVibrate = "vibrate" in navigator;
 
         ///////////// DEALING WITH BUTTONS AND EFFECTS
         function increment(e) {
@@ -201,7 +196,7 @@
                 return;
             }
             e.target.style.transform = "scale(1.3)";
-            supportsVibrate && window.navigator.vibrate(40);
+            window.navigator.vibrate(40);
             operations(e, "+1");
         };
         function decrement(e) {
@@ -209,7 +204,7 @@
                 return;
             }
             e.target.style.transform = "scale(1.3)";
-            supportsVibrate && window.navigator.vibrate(40);
+            window.navigator.vibrate(40);
             operations(e, "-1");
         };
         function operations(e, str) {
@@ -253,7 +248,7 @@
                     } else {
                         document.querySelector(".type p").textContent = "Session";
                         clearFill();
-                        supportsVibrate && window.navigator.vibrate([100, 50, 100, 50]);
+                        window.navigator.vibrate([100, 50, 100, 50]);
                         timer(parseTime(sessionTime));
                     }
                     return;
@@ -274,12 +269,12 @@
         }
         function startTimer() {
             if (!isStarted) {
-                supportsVibrate && window.navigator.vibrate(200);
+                window.navigator.vibrate(200);
                 timer(parseTime(timeLeft));
                 isStarted = true;
             } else {
                 clearInterval(countdown);
-                supportsVibrate && window.navigator.vibrate(200);
+                window.navigator.vibrate(200);
                 isStarted = false;
             }
         }
@@ -297,7 +292,7 @@
         function breakStart() {
             document.querySelector(".type p").textContent = "break";
             clearFill();
-            supportsVibrate && window.navigator.vibrate([100, 50, 100, 50]);
+            window.navigator.vibrate([100, 50, 100, 50]);
             timer(parseTime(breakTime));
         }
         function checkSession() {
@@ -324,32 +319,7 @@
             a.addEventListener("transitionend", removeTransition);
         });
         document.querySelector(".clock-wrapper").addEventListener("click", startTimer);
-        let getTime = milli => {
-            let time = new Date(milli); let day = time.getDate(); let month = time.getMonth() + 1;
-            let year = time.getFullYear(); let hours = time.getHours(); let minutes = time.getMinutes(); let seconds = time.getSeconds();
-            return [day + "/" + month + "/" + year, hours + ":" + minutes + ":" + seconds,];
-        };
-
-
-        var volumeSum;
-        var last11 = ticks.slice(-11);
-        last11.pop();
-        last11.forEach((currentTick) => {
-            let [time, open, high, low, close, volume, closeTime, assetVolume, trades, buyBaseVolume, buyAssetVolume, ignored] = currentTick;
-            volumeSum += volume;
-        });
-        volumeSum = volumeSum / 10;
     </script>
-
-
-
-
-
-
-
-
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 

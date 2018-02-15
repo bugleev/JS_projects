@@ -287,33 +287,21 @@
       buttons = document.querySelectorAll(".calc-btn"),
       newValue = false,
       firstRun = false,
-      eventHandler,
-      supportsVibrate = "vibrate" in navigator;
+      eventHandler;
 
     currentNum.innerText = 0;
-    // function to deal with path property on different browsers
-    function composedPath(el) {
-      var path = [];
-      while (el) {
-        path.push(el);
-        if (el.tagName === 'HTML') {
-          path.push(document);
-          path.push(window);
-          return path;
-        }
-        el = el.parentElement;
-      }
-    }
 
     function calc(e) {
-
-      //setting the path property of the fired event
-      var path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
+      e.target.classList.remove("pressed");
+      e.target.parentElement.classList.remove("pressed");
+      addValue(e);
+      operations(e);
+      evaluate(e);
 
       function addValue(e) {
         var strLength = currentNum.innerText.length,
-          strValue = path[0].innerText;
-        if (path[0].dataset.type === "empty" || path[0].dataset.type === "MR") {
+          strValue = e.target.innerText;
+        if (e.target.dataset.type === "empty" || e.target.dataset.type === "MR") {
           return;
         }
         if (newValue && prevNum.innerText !== "0" && strValue === "=") {
@@ -323,19 +311,19 @@
           firstRun = false;
         }
         //if num pressed after the operator
-        if (newValue && strValue !== "." && path[0].dataset.type === "num") {
+        if (newValue && strValue !== "." && e.target.dataset.type === "num") {
           currentNum.innerText = "";
           newValue = false;
         }
         //if another operator pressed arfter first one
-        else if (newValue && !path[0].dataset.type) {
+        else if (newValue && !e.target.dataset.type) {
 
           if (currentNum.innerText === prevNum.innerText.substring(0, prevNum.innerText.length - 1)) {
             prevNum.innerText = currentNum.innerText.concat(strValue);
           }
         }
         //perform multiple operations
-        else if (!path[0].dataset.type && firstRun) {
+        else if (!e.target.dataset.type && firstRun) {
           var a = prevNum.innerText;
           prevNum.innerText = a.concat(currentNum.innerText).concat(strValue);
           currentNum.innerText = eval(a.concat(currentNum.innerText));
@@ -365,7 +353,7 @@
           return;
         }
         //solving 0 and . KEYS
-        if (prevNum.innerText.length < 2 && strLength === 1 && currentNum.innerText === "0" && strValue !== "." && path[0].dataset.type) {
+        if (prevNum.innerText.length < 2 && strLength === 1 && currentNum.innerText === "0" && strValue !== "." && e.target.dataset.type) {
           return currentNum.innerText = strValue;
         }
         if (strValue === ".") {
@@ -378,17 +366,27 @@
           }
         }
         //solving num KEYS
-        if (path[0].dataset.type === "num") {
+        if (e.target.dataset.type === "num") {
           currentNum.innerText = currentNum.innerText.concat(strValue);
         }
       }
       function operations(e) {
-        var strValue = path[0].innerText;
-        if (!path[0].dataset.type && !firstRun) {
+        var strValue = e.target.innerText;
+        if (!e.target.dataset.type && !firstRun) {
           prevNum.innerText = a = currentNum.innerText.concat(strValue);
           prevNum.classList.remove("hidden");
           newValue = true;
           firstRun = true;
+        }
+      }
+      function evaluate(e) {
+        var strValue = e.target.innerText;
+        if (!newValue && currentNum.innerText !== "0." && strValue === "=" && prevNum.innerText !== "0") {
+          currentNum.innerText = resultCheck(prevNum.innerText, currentNum.innerText);
+          prevNum.innerText = "0";
+          prevNum.classList.add("hidden");
+          newValue = true;
+          firstRun = false;
         }
       }
       function resultCheck(prev, curr) {
@@ -407,21 +405,6 @@
         })).toString();
         return (!isBig && result.length > 18) ? (result = parseFloat(result).toExponential(11).toString(), result) : result;
       }
-      function evaluate(e) {
-        var strValue = path[0].innerText;
-        if (!newValue && currentNum.innerText !== "0." && strValue === "=" && prevNum.innerText !== "0") {
-          currentNum.innerText = resultCheck(prevNum.innerText, currentNum.innerText);
-          prevNum.innerText = "0";
-          prevNum.classList.add("hidden");
-          newValue = true;
-          firstRun = false;
-        }
-      }
-      path[0].classList.remove("pressed");
-      path[1].classList.remove("pressed");
-      addValue(e);
-      operations(e);
-      evaluate(e);
     }
 
     document.addEventListener("mouseup", () => calc(eventHandler));
@@ -429,13 +412,13 @@
     buttons.forEach(function (btn) {
       btn.addEventListener("mousedown", function (e) {
         eventHandler = e;
-        var path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
-        path[0].classList.add("pressed");
-        path[1].classList.add("pressed");
-        supportsVibrate && window.navigator.vibrate(40);
+        e.target.classList.add("pressed");
+        e.target.parentElement.classList.add("pressed");
+        window.navigator.vibrate(40);
 
       });
     });
+
   </script>
 
 

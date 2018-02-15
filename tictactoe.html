@@ -380,9 +380,7 @@
       options.style.left = "500px";
       btnWrapper.style.opacity = "1";
       document.querySelector(".overflow-wrapper >.container-fluid").style.border = "none";
-      cells.forEach(function (e) {
-        e.style.opacity = "100";
-      });
+      cells.forEach((e) => e.style.opacity = "100");
     }
 
     // HANDLE TEAM SELECTION AND ASSIGNING TEAMS, ALSO DISPLAY CELLS GRID
@@ -405,15 +403,13 @@
       });
       playerScore = [];
       aiScore = [];
-      cells.forEach(function (el) {
-        el.classList.remove("cell-colored");
-      });
+      cells.forEach((el) => el.classList.remove("cell-colored"));
       resetScoreboard();
       win = false;
       document.querySelector(".win-text").textContent = "";
       document.querySelector(".win-text").classList.remove("win-text-show");
     }
-    // HANDLE PLAYER CLICKS ON A CELL, CHECK FOR PRESENCE OF A CELL IN THE "scoreboard" VAR AND FOR AI TO HAS MADE A MOVE,
+    // HANDLE PLAYER CLICKS ON A CELL, CHECK FOR PRESENCE OF A CELL IN THE "scoreboard" VAR AND FOR AI TO HAD MADE A MOVE,
     // THEN PUSH THE VALUE TO A "playerscore" VAR AND REMOVE FROM THE "scoreboard" VAR
 
     function playerMove(e) {
@@ -551,10 +547,8 @@
     });
   </script>
 
-
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
 </body>
