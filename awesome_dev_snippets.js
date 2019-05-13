@@ -4,3 +4,11 @@ export function uuid() {
     return v.toString(16);
   });
 }
+export function safeAwait(promise) {
+  return promise
+    .then(data => {
+      if (data instanceof Error) return [data];
+      return [null, data];
+    })
+    .catch(err => [err]);
+} 
