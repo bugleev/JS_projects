@@ -12,3 +12,9 @@ export function safeAwait(promise) {
     })
     .catch(err => [err]);
 } 
+export const sleep = (t = Math.random() * 200 + 300) =>
+  new Promise(resolve => setTimeout(resolve, t))
+
+export function shuffle(array) {
+  return [...array].sort(() => Math.random() - 0.5);
+}
