@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <style>
+      body {
+        background-color: aqua;
+      }
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+      }
+
+      .hamburger {
+        width: 50px;
+        height: 8px;
+        background: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: 0.35s;
+      }
+
+      .hamburger:before,
+      .hamburger:after {
+        content: '';
+        background: #fff;
+        position: absolute;
+        width: 50px;
+        height: 6px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: 0.35s;
+      }
+
+      .hamburger:before {
+        top: -16px;
+      }
+
+      .hamburger:after {
+        top: 22px;
+      }
+
+      .icon.active .hamburger {
+        background: rgba(0, 0, 0, 0);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+      }
+
+      .icon.active .hamburger:before {
+        top: 0;
+        left: 0;
+        transform: rotate(45deg);
+      }
+
+      .icon.active .hamburger:after {
+        top: 0;
+        left: 0;
+        transform: rotate(135deg);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="icon">
+      <div class="hamburger"></div>
+    </div>
+    <script>
+      function add3() {
+        const num = 3;
+        return function logging(x) {
+          console.log(x * num);
+        };
+      }
+
+      const newFunc = add3();
+      newFunc(2);
+
+      function makeAdder(x) {
+        return function(y) {
+          return x + y;
+        };
+      }
+      const add15 = makeAdder(15);
+      console.log(add15(15));
+    </script>
+  </body>
+</html>
